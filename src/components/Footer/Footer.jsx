@@ -2,6 +2,12 @@ import React from "react";
 import "./Footer.css";
 import logo from "../../assets/img/logo-bn.webp";
 
+const socialList = [
+  { href: "https://boredbutton.com", class: "fa-brands fa-facebook" },
+  { href: "https://boredbutton.com", class: "fa-brands fa-instagram" },
+  { href: "https://boredbutton.com", class: "fa-brands fa-x-twitter" },
+];
+
 const Footer = () => {
   return (
     <footer className="footer">
@@ -10,36 +16,18 @@ const Footer = () => {
       </a>
 
       <ul className="iconos">
-        <li>
-          <a
-            href="https://boredbutton.com"
-            target="_blank"
-            rel="noreferrer"
-            className="tilt"
-          >
-            <i className="fa-brands fa-facebook"></i>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://boredbutton.com"
-            target="_blank"
-            rel="noreferrer"
-            className="tilt"
-          >
-            <i className="fa-brands fa-instagram"></i>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://boredbutton.com"
-            target="_blank"
-            rel="noreferrer"
-            className="tilt"
-          >
-            <i className="fa-brands fa-x-twitter"></i>
-          </a>
-        </li>
+        {socialList.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noreferrer"
+              className="tilt"
+            >
+              <i className={link.class}></i>
+            </a>
+          </li>
+        ))}
       </ul>
 
       <hr className="long-line" />
