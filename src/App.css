@@ -1,38 +1,116 @@
-.App {
-  text-align: center;
+.main-title {
+  /* Titulo principal */
+  font-size: 2.8rem;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+}
+.banner {
+  /* Estructura basica para los banners*/
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  min-height: 40vh;
+  color: #fff;
+  width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.section-title {
+  /* Titulo para sections */
+  font-size: 2.3rem;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.alter-title {
+  /* Titulo pequeño de contraste */
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.m-y {
+  /* Estandar de margenes */
+  margin: 0 7rem;
+}
+
+.p-y {
+  /* Lo mismo pero version padding */
+  padding: 0 7rem;
+}
+.bold {
+  font-weight: 700;
+}
+.italic {
+  font-style: italic;
+}
+.btn {
+  /* Estandar botones */
+  padding: 0.8rem 2rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  border-radius: 0;
+  background-color: transparent;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.primary-button {
+  /* Boton blanco */
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.primary-button:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.secondary-button {
+  /* Boton negro */
+  border: 2px solid #000;
+  color: #000;
+}
+
+.secondary-button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.main-content,
+.content-section,
+.banner {
+  /* Centra vertical y horizontalmente */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.content-section {
+  /* Puse los margenes por separado pq sino m-y los pisa*/
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  gap: 1.5rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main-content p,
+.content-section p {
+  /* Regula los parrafos */
+  font-size: 1.5rem;
+  text-align: center;
+  max-width: 60%;
+  text-wrap: pretty;
+}
+
+hr:not(.long-line) {
+  /* Linea decorativa */
+  border: 1px solid #000;
+  width: 5rem;
+}
+
+.center-text {
+  text-align: center;
 }

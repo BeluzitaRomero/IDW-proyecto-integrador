@@ -1,0 +1,17 @@
+header {
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  position: sticky;
+  top: 0;
+  background-color: #f7f6f2;
+  width: 100%;
+  z-index: 1;
+}
+
+.logo img {
+  width: 6rem;
+}
