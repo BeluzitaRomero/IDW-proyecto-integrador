@@ -7,7 +7,11 @@ const Item = ({ item }) => {
     <article className="card tilt">
       <figure>
         <img src={item.cover_img} alt="Alojamiento" />
-        <figcaption className="availability">Reservado</figcaption>
+        {item.available ? (
+          <figcaption className="available">Disponible</figcaption>
+        ) : (
+          <figcaption className="no-available">Reservado</figcaption>
+        )}
       </figure>
       <div className="card-container">
         <p className="card-category italic">{item.category}</p>

@@ -28,12 +28,22 @@
   font-size: 0.9rem;
 }
 
-.card .availability {
+.card .no-available {
   position: absolute;
   right: 0;
   top: 1.5rem;
   font-size: 1rem;
   background-color: #1e1e1e;
+  color: #fff;
+  padding: 0.6rem 0.8rem;
+}
+
+.card .available {
+  position: absolute;
+  right: 0;
+  top: 1.5rem;
+  font-size: 1rem;
+  background-color: #2e8b57;
   color: #fff;
   padding: 0.6rem 0.8rem;
 }

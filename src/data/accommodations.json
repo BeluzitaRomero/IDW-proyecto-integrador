@@ -6,7 +6,8 @@
     "location": "Mar del Plata, Buenos Aires",
     "number_of_rooms": 20,
     "price": 5000,
-    "cover_img": "/img/casa1.webp"
+    "cover_img": "/img/casa1.webp",
+    "available": false
   },
   {
     "id": "2",
@@ -15,7 +16,8 @@
     "location": "Villa General Belgrano, Córdoba",
     "number_of_rooms": 4,
     "price": 8000,
-    "cover_img": "/img/casa5.webp"
+    "cover_img": "/img/casa5.webp",
+    "available": true
   },
   {
     "id": "3",
@@ -24,7 +26,8 @@
     "location": "San Carlos de Bariloche, Río Negro",
     "number_of_rooms": 30,
     "price": 7000,
-    "cover_img": "/img/casa2.webp"
+    "cover_img": "/img/casa2.webp",
+    "available": false
   },
   {
     "id": "4",
@@ -33,7 +36,8 @@
     "location": "Pinamar, Buenos Aires",
     "number_of_rooms": 3,
     "price": 6000,
-    "cover_img": "/img/casa3.webp"
+    "cover_img": "/img/casa3.webp",
+    "available": true
   },
   {
     "id": "5",
@@ -42,7 +46,8 @@
     "location": "Villa Carlos Paz, Córdoba",
     "number_of_rooms": 25,
     "price": 5500,
-    "cover_img": "/img/casa4.webp"
+    "cover_img": "/img/casa4.webp",
+    "available": true
   },
   {
     "id": "6",
@@ -51,6 +56,7 @@
     "location": "Mar de las Pampas, Buenos Aires",
     "number_of_rooms": 5,
     "price": 9000,
-    "cover_img": "/img/casa5.webp"
+    "cover_img": "/img/casa5.webp",
+    "available": false
   }
 ]
