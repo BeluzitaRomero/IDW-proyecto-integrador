@@ -43,41 +43,6 @@
 .italic {
   font-style: italic;
 }
-.btn {
-  /* Estandar botones */
-  padding: 0.8rem 2rem;
-  text-transform: uppercase;
-  text-decoration: none;
-  font-family: Montserrat, sans-serif;
-  font-weight: 500;
-  font-size: 0.9rem;
-  border-radius: 0;
-  background-color: transparent;
-  transition: all 0.3s;
-  cursor: pointer;
-}
-
-.primary-button {
-  /* Boton blanco */
-  border: 2px solid #fff;
-  color: #fff;
-}
-
-.primary-button:hover {
-  background-color: #fff;
-  color: #000;
-}
-
-.secondary-button {
-  /* Boton negro */
-  border: 2px solid #000;
-  color: #000;
-}
-
-.secondary-button:hover {
-  background-color: #000;
-  color: #fff;
-}
 
 .main-content,
 .content-section,
