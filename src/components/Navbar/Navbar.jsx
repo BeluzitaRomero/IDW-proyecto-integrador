@@ -1,19 +1,20 @@
 import React from "react";
 import "./Navbar.css";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <nav>
       <ul>
         <li>
-          <a className="item-link underline" href="pages/institutional.html">
+          <Link className="item-link underline" to="/institucional">
             Institucional
-          </a>
+          </Link>
         </li>
         <li>
-          <a className="item-link underline" href="pages/contact.html">
+          <Link className="item-link underline" to="/contacto">
             Contacto
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>
