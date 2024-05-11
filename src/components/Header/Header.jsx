@@ -3,14 +3,15 @@ import Navbar from "../Navbar/Navbar";
 import logo from "../../assets/img/logo.webp";
 
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <header>
       <div className="logo">
-        <a href="index.html">
+        <Link to="/">
           <img src={logo} alt="Logo" />
-        </a>
+        </Link>
       </div>
       <Navbar />
     </header>
