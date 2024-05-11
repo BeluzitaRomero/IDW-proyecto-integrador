@@ -1,6 +1,7 @@
 import React from "react";
 import "./Footer.css";
 import logo from "../../assets/img/logo-bn.webp";
+import Button from "../Button/Button";
 
 const socialList = [
   { href: "https://boredbutton.com", class: "fa-brands fa-facebook" },
@@ -59,7 +60,10 @@ const Footer = () => {
               type="mail"
               placeholder="Ingresá tu Email"
             />
-            <button className="btn primary-button">¡Quiero Recibirlas!</button>
+            <Button
+              className="btn primary-button"
+              value={"¡Quiero Recibirlas!"}
+            />
           </form>
         </div>
       </div>
