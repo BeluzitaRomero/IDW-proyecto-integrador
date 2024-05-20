@@ -1,5 +1,6 @@
 import React from "react";
 import "./MainHome.css";
+import { Link } from "react-router-dom";
 
 const MainHome = () => {
   return (
@@ -13,9 +14,9 @@ const MainHome = () => {
         perfecto para tu próxima aventura. ¡Explora nuestras opciones y reserva
         hoy mismo para asegurarte una experiencia inolvidable!
       </p>
-      <a href="#explorar" className="btn primary-button fade-in-bottom">
+      <Link to="#explorar" className="btn primary-button fade-in-bottom">
         Explorar
-      </a>
+      </Link>
     </main>
   );
 };

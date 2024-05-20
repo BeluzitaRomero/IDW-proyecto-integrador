@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import MainHome from "../MainHome/MainHome";
-import SearchInput from "../SearchInput/SearchInput";
 import ItemList from "../ItemList/ItemList";
 
 import { getAccommodations } from "../../utils/api";
 import dataJson from "../../data/accommodations.json";
+import Button from "../Button/Button";
 
 const ItemListContainer = () => {
   const [accommodations, setAccommodations] = useState([]);
@@ -17,9 +16,6 @@ const ItemListContainer = () => {
 
   return (
     <>
-      <MainHome />
-      <SearchInput />
-
       <section id="explorar" className="content-section m-y">
         <h2 className="section-title">Estas en IDW. Estas en casa</h2>
         <hr />
@@ -36,7 +32,7 @@ const ItemListContainer = () => {
           <p>Cargando...</p>
         )}
 
-        <button class="btn secondary-button">Ver mas</button>
+        <Button className="btn secondary-button" value="Ver mas"></Button>
       </section>
     </>
   );
