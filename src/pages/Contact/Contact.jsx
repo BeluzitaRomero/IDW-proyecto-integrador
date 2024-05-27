@@ -6,7 +6,7 @@ const Contact = () => {
   const [mensajesArray, setMensajesArray] = useState([]);
 
   const [mensaje, setMensaje] = useState({
-    nonmbreYApellido: "",
+    nombreYApellido: "",
     email: "",
     mensaje: ""
   });
@@ -54,7 +54,7 @@ const Contact = () => {
         <form action="#">
           <fieldset>
             <legend>Nombre y Apellido:</legend>
-            <input className="form-input" type="text" id="nombre" name="nombre" placeholder="Nombre y Apellido" value={mensaje.nonmbreYApellido} required onChange={(evt) => setMensaje({ ...mensaje, nonmbreYApellido: evt.target.value })}/>
+            <input className="form-input" type="text" id="nombre" name="nombre" placeholder="Nombre y Apellido" value={mensaje.nombreYApellido} required onChange={(evt) => setMensaje({ ...mensaje, nombreYApellido: evt.target.value })}/>
           </fieldset>
         
           <fieldset>
@@ -71,8 +71,28 @@ const Contact = () => {
           <button className="btn secondary-button" type="submit" onClick={() => enviarForm()}>Enviar</button>
         </form>
       </div>
-    </main>
-  );
+      {!mensajesArray ? "" :
+          <table>
+            <thead>
+              <tr>
+                <th>Apellido y Nombre</th>
+                <th>Email</th>
+                <th>Mensaje</th>
+              </tr>
+            </thead>
+            <tbody>{
+              mensajesArray.map((m, index) => 
+              <tr key={index}>
+                <td data-label="Apellido y Nombre">{m.nombreYApellido}</td>
+                <td data-label="Email">{m.email}</td>
+                <td data-label="Mensaje">{m.mensaje}</td>
+              </tr>)
+            }
+            </tbody>
+          </table>
+        }
+    </main>    
+  );  
 };
 
 export default Contact;
