@@ -1,0 +1,61 @@
+.m-contact {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url("../../assets/img/banner-contact.jpg");
+}
+.formulario {
+  background-color: #fff;
+  width: 80%;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.formulario legend {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.formulario input[type="text"],
+.formulario input[type="email"],
+.formulario textarea {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.formulario textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.form-input,
+textarea {
+  font-style: italic;
+  font-family: Montserrat, sans-serif;
+  border: none;
+}
+
+label {
+  background-color: #fff;
+}
+
+input {
+  width: 100%;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+fieldset {
+  border: 1px solid #ccc;
+}
+
+legend {
+  margin-left: 10px;
+}
