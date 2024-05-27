@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import bedIcon from "../../assets/img/bed-icon.webp";
+import { Link } from "react-router-dom";
 import "./Item.css";
 
 import { obtenerCiudad } from "../../utils/api";
@@ -17,32 +18,36 @@ const Item = ({ item }) => {
 
   return (
     <article className="card tilt">
-      <figure>
-        <img
-          src={
-            item.imagenes.find((element) => element.cover === true).rutaArchivo
-          }
-          alt="Alojamiento"
-        />
-        {item.disponible ? (
-          <figcaption className="available">Disponible</figcaption>
-        ) : (
-          <figcaption className="no-available">Reservado</figcaption>
-        )}
-      </figure>
-      <div className="card-container">
-        <p className="card-category italic">{item.tipoAlojamiento}</p>
-        <h3 className="card-title">{item.titulo}</h3>
-
-        <p className="card-detail">{ciudad ? ciudad : "Cargando"}</p>
-      </div>
-      <div className="card-details">
-        <div className="icon-container">
-          <img src={bedIcon} alt="Habitaciones" />
-          <p className="rooms">{item.cantidadDormitorios}</p>
+      <Link to={`/alojamiento/${item.idAlojamiento}`} className="link">
+        <div className="card-container">
+          <figure>
+            <img
+              src={
+                item.imagenes.find((element) => element.cover === true)
+                  .rutaArchivo
+              }
+              alt={item.titulo}
+            />
+            {item.disponible ? (
+              <figcaption className="available">Disponible</figcaption>
+            ) : (
+              <figcaption className="no-available">Reservado</figcaption>
+            )}
+          </figure>{" "}
+          <div className="card-info">
+            <p className="card-category italic">{item.tipoAlojamiento}</p>
+            <h3 className="card-title">{item.titulo}</h3>
+            <p className="card-location">{ciudad ? ciudad : "Cargando"}</p>
+          </div>
         </div>
-        <p className="card-price bold">{item.precioPorDia}</p>
-      </div>
+        <div className="card-details">
+          <div className="icon-container">
+            <img src={bedIcon} alt="Habitaciones" />
+            <p className="rooms">{item.cantidadDormitorios}</p>
+          </div>
+          <p className="card-price bold">{item.precioPorDia}</p>
+        </div>
+      </Link>
     </article>
   );
 };
