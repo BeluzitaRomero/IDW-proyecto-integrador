@@ -1,7 +1,39 @@
-import React from "react";
+import {useState, useEffect} from "react";
 import "./Contact.css";
 
 const Contact = () => {
+
+  const [mensajesArray, setMensajesArray] = useState([]);
+
+  const [mensaje, setMensaje] = useState({
+    nonmbreYApellido: "",
+    email: "",
+    mensaje: ""
+  });
+
+  useEffect(() => {
+    cargar();
+  }, []);
+
+  const cargar = () => {
+    let lsMensajes = JSON.parse(localStorage.getItem("mensajes"));
+    if (typeof (lsMensajes) === "undefined") {
+      lsMensajes = [];
+    }
+    setMensajesArray(lsMensajes);
+  }
+
+  const enviarForm = () => {
+    alert(JSON.stringify(mensaje));
+    let lsMensajes = [];
+    if (localStorage.getItem("mensajes")) {
+      lsMensajes = JSON.parse(localStorage.getItem("mensajes"));
+    }
+    lsMensajes.push(mensaje);
+    localStorage.setItem("mensajes", JSON.stringify(lsMensajes));
+    setMensajesArray(lsMensajes);
+  };
+
   return (
     <main className="main-content">
       <div className="banner m-contact">
@@ -18,25 +50,25 @@ const Contact = () => {
       </div>
       <div className="formulario">
         <h2>Formulario de Contacto</h2>
-        <br />
+        
         <form action="#">
           <fieldset>
             <legend>Nombre y Apellido:</legend>
-            <input className="form-input" type="text" id="nombre" name="nombre" placeholder="Nombre y Apellido" required />
+            <input className="form-input" type="text" id="nombre" name="nombre" placeholder="Nombre y Apellido" value={mensaje.nonmbreYApellido} required onChange={(evt) => setMensaje({ ...mensaje, nonmbreYApellido: evt.target.value })}/>
           </fieldset>
-          <br />
+        
           <fieldset>
             <legend>Correo Electrónico:</legend>
-            <input className="form-input" type="email" id="email" name="email" required placeholder="Correo Electrónico" />
+            <input className="form-input" type="email" id="email" name="email" required placeholder="Correo Electrónico" value={mensaje.email} onChange={(evt) => setMensaje({ ...mensaje, email: evt.target.value })}/>
           </fieldset>
-          <br />
+        
           <fieldset>
             <legend>Consulta:</legend>
             <textarea className="form-input" id="consulta" name="consulta" required
-              placeholder="Escriba su consulta..."></textarea>
+              placeholder="Escriba su consulta..." value={mensaje.mensaje} onChange={(evt) => setMensaje({ ...mensaje, mensaje: evt.target.value })}></textarea>
           </fieldset>
-          <br />
-          <button className="btn secondary-button" type="submit">Enviar</button>
+        
+          <button className="btn secondary-button" type="submit" onClick={() => enviarForm()}>Enviar</button>
         </form>
       </div>
     </main>
