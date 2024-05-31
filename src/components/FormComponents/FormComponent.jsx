@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import FormAccommodation from "./FormAccommodation/FormAccommodation";
 import FormAccommodationType from "./FormAccommodationType/FormAccommodationType";
 import Banner from "../Banner/Banner";
+import adminImg from "../../assets/img/banner-admin.jpg";
 
 const FormComponent = () => {
   const { formComponent } = useParams();
@@ -20,7 +21,7 @@ const FormComponent = () => {
   };
   return (
     <>
-      <Banner />
+      <Banner imagen={adminImg} titulo="Formulario" />
       <>{renderForm()}</>
     </>
   );
