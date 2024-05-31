@@ -40,7 +40,7 @@ const Item = ({ item }) => {
             <p className="card-location">{ciudad ? ciudad : "Cargando"}</p>
           </div>
         </div>
-        <div className="card-details">
+        <div className="card-details flex-con">
           <div className="icon-container">
             <img src={bedIcon} alt="Habitaciones" />
             <p className="rooms">{item.cantidadDormitorios}</p>

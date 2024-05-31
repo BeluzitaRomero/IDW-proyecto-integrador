@@ -9,6 +9,21 @@ export const getAccommodations = (dataList) =>
     }, 2000);
   });
 
+export const getAccommodationDetail = (data, id) =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (data.length) {
+        resolve(
+          data.find(
+            (accommodation) => accommodation.idAlojamiento === parseInt(id)
+          )
+        );
+      } else {
+        reject("Error");
+      }
+    }, 2000);
+  });
+
 /* El setTimeout lo pongo aca solamente como para
     simular un tiempo de respuesta de cuando se pide la data
     y que tenga un pequelo rendering condicional con un ternario en el

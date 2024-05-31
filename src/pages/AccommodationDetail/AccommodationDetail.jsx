@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { obtenerCiudad } from "../../utils/api";
 import Banner from "../../components/Banner/Banner";
-import "./AccomodationDetail.css";
+import "./AccommodationDetail.css";
 import bedIcon from "../../assets/img/bed-icon.webp";
 import toiletIcon from "../../assets/img/toilet-icon.webp";
 import Slider from "react-slick";
@@ -9,11 +9,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { carouselSettings } from "../../utils/carouselSettings";
 
-const AccomodationDetail = ({ item }) => {
+const AccommodationDetail = ({ item }) => {
   const [ciudad, setCiudad] = useState(null);
   const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     obtenerCiudad(item.ubicacion.latitud, item.ubicacion.longitud)
       .then((res) => setCiudad(res))
       .catch((err) => console.error("Error:", err));
@@ -28,7 +29,7 @@ const AccomodationDetail = ({ item }) => {
       />
       <main className="m-y">
         <section className="title-container flex-col">
-          <div className="title-section">
+          <div className="title-section flex-col">
             <h1 className="main-title">{item.titulo}</h1>
             <h2 className="alter-title">
               {item.disponible ? "Disponible" : "Reservado"} • $
@@ -89,4 +90,4 @@ const AccomodationDetail = ({ item }) => {
   );
 };
 
-export default AccomodationDetail;
+export default AccommodationDetail;

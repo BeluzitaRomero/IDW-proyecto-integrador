@@ -23,8 +23,7 @@ const Footer = () => {
               href={link.href}
               target="_blank"
               rel="noreferrer"
-              className="tilt"
-            >
+              className="tilt">
               <i className={link.class}></i>
             </a>
           </li>

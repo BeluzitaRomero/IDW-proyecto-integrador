@@ -1,0 +1,75 @@
+[
+  {
+    "idAlojamiento": 1,
+    "titulo": "Cabaña en las montañas",
+    "descripcion": "Acogedora cabaña ubicada en medio de la naturaleza con vistas espectaculares a las montañas.",
+    "tipoAlojamiento": "Cabaña",
+    "latitud": -41.1324,
+    "longitud": -71.3096,
+    "precioPorDia": 2000,
+    "cantidadDormitorios": 2,
+    "cantidadBanios": 1,
+    "disponible": true
+  },
+  {
+    "idAlojamiento": 2,
+    "titulo": "Departamento en el centro",
+    "descripcion": "Moderno departamento ubicado en el corazón de la ciudad, cerca de tiendas y restaurantes.",
+    "tipoAlojamiento": "Departamento",
+    "latitud": -34.6037,
+    "longitud": -58.3816,
+    "precioPorDia": 1500,
+    "cantidadDormitorios": 1,
+    "cantidadBanios": 1,
+    "disponible": false
+  },
+  {
+    "idAlojamiento": 3,
+    "titulo": "Casa frente al mar",
+    "descripcion": "Espaciosa casa con vistas panorámicas al mar y acceso directo a la playa.",
+    "tipoAlojamiento": "Casa",
+
+    "latitud": -38.0055,
+    "longitud": -57.5426,
+    "precioPorDia": 3000,
+    "cantidadDormitorios": 3,
+    "cantidadBanios": 2,
+    "disponible": false
+  },
+  {
+    "idAlojamiento": 4,
+    "titulo": "Habitación en Bed & Breakfast",
+    "descripcion": "Acogedora habitación en un Bed & Breakfast con desayuno incluido, ideal para parejas.",
+    "tipoAlojamiento": "Bed & Breakfast",
+    "latitud": -41.1316,
+    "longitud": -71.3089,
+    "precioPorDia": 1000,
+    "cantidadDormitorios": 1,
+    "cantidadBanios": 1,
+    "disponible": true
+  },
+  {
+    "idAlojamiento": 5,
+    "titulo": "Habitación en hotel boutique",
+    "descripcion": "Elegante habitación en un hotel boutique con vistas al jardín y servicio de spa.",
+    "tipoAlojamiento": "Hotel Boutique",
+    "latitud": -34.5789,
+    "longitud": -58.4139,
+    "precioPorDia": 2500,
+    "cantidadDormitorios": 1,
+    "cantidadBanios": 1,
+    "disponible": false
+  },
+  {
+    "idAlojamiento": 6,
+    "titulo": "Alojamiento rural",
+    "descripcion": "Tranquilo alojamiento rural rodeado de naturaleza con actividades al aire libretrue.",
+    "tipoAlojamiento": "Casa Rural",
+    "latitud": -31.424,
+    "longitud": -64.1856,
+    "precioPorDia": 1800,
+    "cantidadDormitorios": 2,
+    "cantidadBanios": 1,
+    "disponible": true
+  }
+]
