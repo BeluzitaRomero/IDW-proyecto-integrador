@@ -16,6 +16,11 @@ const Navbar = () => {
             Contacto
           </Link>
         </li>
+        <li>
+          <Link className="item-link underline" to="/administrar">
+            Administrar
+          </Link>
+        </li>
       </ul>
     </nav>
   );

@@ -1,0 +1,60 @@
+.institutional-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
+
+.institutional-section:nth-child(even) {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.institutional-section:nth-child(even) div {
+  padding: 0 2rem 0 7rem;
+}
+
+.institutional-section:nth-child(even) div hr {
+  align-self: end;
+}
+
+.institutional-section figure {
+  width: 50%;
+  object-fit: cover;
+}
+
+.institutional-section div {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 0 7rem 0 2rem;
+  font-size: 1.3rem;
+  gap: 1rem;
+}
+
+.institutional-section figure img {
+  width: 100%;
+}
+
+@media (max-width: 720px) {
+  .institutional-section,
+  .institutional-section:nth-child(even) {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .institutional-section div,
+  .institutional-section:nth-child(even) div {
+    width: 100%;
+    padding: 2rem;
+  }
+
+  .institutional-section figure {
+    width: 100%;
+  }
+
+  .institutional-section:nth-child(even) div hr,
+  .institutional-section div hr {
+    align-self: center;
+  }
+}

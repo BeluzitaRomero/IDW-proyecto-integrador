@@ -1,0 +1,13 @@
+.tab-content {
+  width: 100%;
+}
+
+.tab-btn {
+  border: none;
+  padding: 1rem;
+  background-color: transparent;
+  font-family: Montserrat, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+}

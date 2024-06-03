@@ -64,7 +64,7 @@
 .main-content p,
 .content-section p {
   /* Regula los parrafos */
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-align: center;
   max-width: 60%;
   text-wrap: pretty;
@@ -72,10 +72,59 @@
 
 hr:not(.long-line) {
   /* Linea decorativa */
-  border: 1px solid #000;
+  border: 1px solid #1e1e1e;
   width: 5rem;
 }
 
 .center-text {
   text-align: center;
+}
+
+.flex-space {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.flex-center {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.icon-btn {
+  width: 2.2rem;
+  height: 2.2rem;
+  border: 2px solid #1e1e1e;
+  background-color: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1e1e1e;
+}
+
+@media (max-width: 720px) {
+  .m-y {
+    margin: 2rem;
+  }
+  .p-y {
+    padding: 2rem;
+  }
+  .main-content p,
+  .content-section p {
+    max-width: 80%;
+  }
+
+  .section-title,
+  .main-title {
+    text-align: center;
+    text-wrap: pretty;
+  }
 }
