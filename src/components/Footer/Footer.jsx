@@ -17,13 +17,9 @@ const Footer = () => {
       </a>
 
       <ul className="iconos">
-        {socialList.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              target="_blank"
-              rel="noreferrer"
-              className="tilt">
+        {socialList.map((link, index) => (
+          <li key={index}>
+            <a href={link.href} target="_blank" rel="noreferrer" className="tilt">
               <i className={link.class}></i>
             </a>
           </li>
@@ -54,15 +50,8 @@ const Footer = () => {
         <div className="columna-footer">
           <p>¿Quéres recibir ofertas exclusivas en tu email?</p>
           <form>
-            <input
-              className="input"
-              type="mail"
-              placeholder="Ingresá tu Email"
-            />
-            <Button
-              className="btn primary-button"
-              value={"¡Quiero Recibirlas!"}
-            />
+            <input className="input" type="mail" placeholder="Ingresá tu Email" />
+            <Button className="btn primary-button" value={"¡Quiero Recibirlas!"} />
           </form>
         </div>
       </div>

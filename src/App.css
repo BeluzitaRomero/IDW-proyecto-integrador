@@ -80,10 +80,16 @@ hr:not(.long-line) {
   text-align: center;
 }
 
-.flex-con {
+.flex-space {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+.flex-center {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .flex-col {

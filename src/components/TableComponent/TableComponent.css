@@ -24,7 +24,7 @@ table tr td:first-child {
 }
 table th:last-child,
 table tr td:last-child {
-  width: 8rem;
+  width: 9rem;
 }
 
 tr:nth-child(even) {
@@ -39,7 +39,7 @@ td .icon-btn {
   font-size: 0.9rem;
 }
 
-td.flex-con {
+td.flex-center {
   border: none;
 }
 table {

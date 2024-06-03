@@ -7,29 +7,16 @@ import "./Administration.css";
 const Administration = () => {
   const [activeTab, setActiveTab] = useState("alojamientos");
 
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
-  };
+  const tableUrl = "http://localhost:3001/";
 
   const renderTabContent = () => {
     switch (activeTab) {
       case "alojamientos":
         return (
           <TableComponent
-            titles={[
-              "Id",
-              "Titulo",
-              "Descripcion",
-              "Latitud",
-              "Longitud",
-              "Precio",
-              "Dormitorios",
-              "Baños",
-              "Disponible",
-              "Tipo",
-              "Acciones",
-            ]}
-            tableUrl="http://localhost:3001/alojamiento/getAlojamientos"
+            titles={["Id", "Titulo", "Descripción", "Latitud", "Longitud", "Precio", "Dormitorios", "Baños", "Disponible", "Tipo", "Acciones"]}
+            tableGet={`${tableUrl}alojamiento/getAlojamientos`}
+            tableDelete=""
             tableName="Alojamientos"
             tableParam="alojamientos"
           />
@@ -37,8 +24,9 @@ const Administration = () => {
       case "alojamientosTipo":
         return (
           <TableComponent
-            titles={["Id", "Descripcion", "Acciones"]}
-            tableUrl="http://localhost:3001/tiposAlojamiento/getTiposAlojamiento"
+            titles={["Id", "Descripción", "Acciones"]}
+            tableGet={`${tableUrl}tiposAlojamiento/getTiposAlojamiento`}
+            tableDelete={`${tableUrl}tiposAlojamiento/deleteTipoAlojamiento/`}
             tableName="Tipos de Alojamientos"
             tableParam="tipos-alojamientos"
           />
@@ -53,14 +41,10 @@ const Administration = () => {
       <Banner imagen={adminImg} titulo="Administrador de alojamientos" />
       <main className="m-y main-content">
         <div className="tabs">
-          <button
-            className="tab-btn underline"
-            onClick={() => setActiveTab("alojamientos")}>
+          <button className="tab-btn underline" onClick={() => setActiveTab("alojamientos")}>
             Alojamientos
           </button>
-          <button
-            className="tab-btn underline"
-            onClick={() => setActiveTab("alojamientosTipo")}>
+          <button className="tab-btn underline" onClick={() => setActiveTab("alojamientosTipo")}>
             Tipos de Alojamiento
           </button>
         </div>

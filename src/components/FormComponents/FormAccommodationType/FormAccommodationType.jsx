@@ -13,13 +13,13 @@ const FormAccommodationType = ({ id }) => {
   const [modal, setModal] = useState(false);
   const [modalMessage, setModalMessage] = useState();
 
+  const fetchUrl = "http://localhost:3001/tiposAlojamiento/";
+
   useEffect(() => {
     if (id) {
       const fetchData = async () => {
         try {
-          const response = await axios.get(
-            `http://localhost:3001/tiposAlojamiento/getTipoAlojamiento/${id}`
-          );
+          const response = await axios.get(`${fetchUrl}getTipoAlojamiento/${id}`);
           setForm(response.data);
         } catch (error) {
           console.error("No se encontro un alojamiento con ese id:", error);
@@ -38,26 +38,14 @@ const FormAccommodationType = ({ id }) => {
     e.preventDefault();
     try {
       if (id) {
-        await axios.put(
-          `http://localhost:3001/tiposAlojamiento/putTipoAlojamiento/${id}`,
-          form
-        );
+        await axios.put(`${fetchUrl}putTipoAlojamiento/${id}`, form);
       } else {
-        await axios.post(
-          "http://localhost:3001/tiposAlojamiento/createTipoAlojamiento",
-          form
-        );
+        await axios.post(`${fetchUrl}createTipoAlojamiento`, form);
       }
-      setModalMessage(
-        `Tipo de alojamiento ${id ? "actualizado" : "creado"} con exito`
-      );
+      setModalMessage(`Tipo de alojamiento ${id ? "actualizado" : "creado"} con éxito`);
     } catch (error) {
       console.error("Error:", error);
-      setModalMessage(
-        `Ocurrio un error al ${
-          id ? "actualizar" : "crear"
-        } el tipo de alojamiento`
-      );
+      setModalMessage(`Ocurrió un error al ${id ? "actualizar" : "crear"} el tipo de alojamiento`);
     }
     setModal(true);
     setForm(initialForm);
@@ -65,18 +53,11 @@ const FormAccommodationType = ({ id }) => {
 
   return (
     <main className="m-y crud-form">
-      <h2 className="section-title">
-        {id ? "Actualizar" : "Agregar"} Tipo de Alojamiento
-      </h2>
+      <h2 className="section-title">{id ? "Actualizar" : "Agregar"} Tipo de Alojamiento</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="Descripcion">Descripcion</label>
-          <input
-            name="Descripcion"
-            type="text"
-            defaultValue={form.Descripcion}
-            onChange={handleChange}
-          />
+          <input name="Descripcion" type="text" defaultValue={form.Descripcion} onChange={handleChange} />
         </div>
         <Link to="/administrar" className="btn cancel-button">
           Volver
