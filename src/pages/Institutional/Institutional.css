@@ -35,3 +35,26 @@
 .institutional-section figure img {
   width: 100%;
 }
+
+@media (max-width: 720px) {
+  .institutional-section,
+  .institutional-section:nth-child(even) {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .institutional-section div,
+  .institutional-section:nth-child(even) div {
+    width: 100%;
+    padding: 2rem;
+  }
+
+  .institutional-section figure {
+    width: 100%;
+  }
+
+  .institutional-section:nth-child(even) div hr,
+  .institutional-section div hr {
+    align-self: center;
+  }
+}

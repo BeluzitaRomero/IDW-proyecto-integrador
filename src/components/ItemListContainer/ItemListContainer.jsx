@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
-
 import { getAccommodations } from "../../utils/api";
 import dataJson from "../../data/accommodations.json";
 import Button from "../Button/Button";
@@ -29,7 +28,6 @@ const ItemListContainer = () => {
         {accommodations.length ? (
           <ItemList list={accommodations} />
         ) : (
-          /* Este P es una chotada, pero es provisorio solo para simular el tiempo de carga esperando la respuesta*/
           <Loading />
         )}
 

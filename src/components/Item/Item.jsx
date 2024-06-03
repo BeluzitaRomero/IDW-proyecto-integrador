@@ -21,13 +21,7 @@ const Item = ({ item }) => {
       <Link to={`/alojamiento/${item.idAlojamiento}`} className="link">
         <div className="card-container">
           <figure>
-            <img
-              src={
-                item.imagenes.find((element) => element.cover === true)
-                  .rutaArchivo
-              }
-              alt={item.titulo}
-            />
+            <img src={item.imagenes.find((element) => element.cover === true).rutaArchivo} alt={item.titulo} />
             {item.disponible ? (
               <figcaption className="available">Disponible</figcaption>
             ) : (
@@ -40,7 +34,7 @@ const Item = ({ item }) => {
             <p className="card-location">{ciudad ? ciudad : "Cargando"}</p>
           </div>
         </div>
-        <div className="card-details">
+        <div className="card-details flex-space">
           <div className="icon-container">
             <img src={bedIcon} alt="Habitaciones" />
             <p className="rooms">{item.cantidadDormitorios}</p>

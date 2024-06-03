@@ -19,7 +19,7 @@ html {
 .underline {
   /* El subrayado del nav */
   padding-bottom: 0.5rem;
-  background-image: linear-gradient(#000 0 0);
+  background-image: linear-gradient(#1e1e1e 0 0);
   background-position: 0 100%;
   background-size: 0% 2px;
   background-repeat: no-repeat;
@@ -125,5 +125,11 @@ html {
     -webkit-transform: translateY(0);
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    font-size: 80%;
   }
 }
