@@ -7,7 +7,6 @@ import Contact from "./pages/Contact/Contact";
 import AccommodationDetailContainer from "./components/AccommodationDetailContainer/AccommodationDetailContainer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Administration from "./pages/Administration/Administration.jsx";
-import { useEffect } from "react";
 import FormComponent from "./components/FormComponents/FormComponent.jsx";
 // import FormAccommodation from "./FormAccommodation/FormAccommodation";
 
