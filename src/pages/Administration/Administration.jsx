@@ -14,9 +14,21 @@ const Administration = () => {
       case "alojamientos":
         return (
           <TableComponent
-            titles={["Id", "Titulo", "Descripción", "Latitud", "Longitud", "Precio", "Dormitorios", "Baños", "Disponible", "Tipo", "Acciones"]}
+            titles={[
+              "Id",
+              "Titulo",
+              "Descripción",
+              "Latitud",
+              "Longitud",
+              "Precio",
+              "Dormitorios",
+              "Baños",
+              "Disponible",
+              "Tipo",
+              "Acciones",
+            ]}
             tableGet={`${tableUrl}alojamiento/getAlojamientos`}
-            tableDelete=""
+            tableDelete={`${tableUrl}alojamiento/deleteAlojamiento`}
             tableName="Alojamientos"
             tableParam="alojamientos"
           />
@@ -51,10 +63,16 @@ const Administration = () => {
       <Banner imagen={adminImg} titulo="Administrador de alojamientos" />
       <main className="m-y main-content">
         <div className="tabs">
-          <button className="tab-btn underline" onClick={() => setActiveTab("alojamientos")}>
+          <button
+            className="tab-btn underline"
+            onClick={() => setActiveTab("alojamientos")}
+          >
             Alojamientos
           </button>
-          <button className="tab-btn underline" onClick={() => setActiveTab("alojamientosTipo")}>
+          <button
+            className="tab-btn underline"
+            onClick={() => setActiveTab("alojamientosTipo")}
+          >
             Tipos de Alojamiento
           </button>
           <button className="tab-btn underline" onClick={() => setActiveTab("servicios")}>

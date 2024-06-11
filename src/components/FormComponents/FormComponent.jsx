@@ -13,7 +13,7 @@ const FormComponent = () => {
   const renderForm = () => {
     switch (formComponent) {
       case "alojamientos":
-        return <FormAccommodation />;
+        return <FormAccommodation id={formId} />;
       case "tipos-alojamientos":
         return <FormAccommodationType id={formId} />;
       case "servicios":

@@ -4,7 +4,13 @@ import "./TableComponent.css";
 import Modal from "../Modal/Modal";
 import { getData, deleteData } from "../../utils/api";
 
-const TableComponent = ({ titles, tableGet, tableDelete, tableName, tableParam }) => {
+const TableComponent = ({
+  titles,
+  tableGet,
+  tableDelete,
+  tableName,
+  tableParam,
+}) => {
   const [data, setData] = useState([]);
   const [modal, setModal] = useState(false);
   const [modalId, setModalId] = useState(null);
@@ -53,19 +59,32 @@ const TableComponent = ({ titles, tableGet, tableDelete, tableName, tableParam }
               ))}
               <td className="flex-center">
                 {tableName === "Alojamientos" && (
-                  <Link to={`/alojamiento/${Object.values(singleData)[0]}`} className="icon-btn fa-solid fa-arrow-up-right-from-square"></Link>
+                  <Link
+                    to={`/alojamiento/${Object.values(singleData)[0]}`}
+                    className="icon-btn fa-solid fa-arrow-up-right-from-square"
+                  ></Link>
                 )}
-                <Link to={`/editar/${tableParam}/${Object.values(singleData)[0]}`} className="icon-btn fa-solid fa-solid fa-pen-to-square"></Link>
+                <Link
+                  to={`/editar/${tableParam}/${Object.values(singleData)[0]}`}
+                  className="icon-btn fa-solid fa-solid fa-pen-to-square"
+                ></Link>
                 <button
                   className="icon-btn fa-solid fa-trash"
                   onClick={() => {
-                    handleDelete(Object.values(singleData)[0], `¿Desea eliminar ${Object.values(singleData)[1]}?`);
-                  }}></button>
+                    handleDelete(
+                      Object.values(singleData)[0],
+                      `¿Desea eliminar ${Object.values(singleData)[1]}?`
+                    );
+                  }}
+                ></button>
               </td>
             </tr>
           ))}
           {modal && (
-            <Modal accept={() => handleDeleteConfirm(modalId)} cancel={() => setModal(false)}>
+            <Modal
+              accept={() => handleDeleteConfirm(modalId)}
+              cancel={() => setModal(false)}
+            >
               <p>{modalMessage}</p>
             </Modal>
           )}
