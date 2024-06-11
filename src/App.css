@@ -110,6 +110,11 @@ hr:not(.long-line) {
   color: #1e1e1e;
 }
 
+.map-container {
+  height: 300px;
+  width: 100%;    
+}
+
 @media (max-width: 720px) {
   .m-y {
     margin: 2rem;

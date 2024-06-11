@@ -8,10 +8,15 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { carouselSettings } from "../../utils/carouselSettings";
+import { Map, Marker, APIProvider} from "@vis.gl/react-google-maps";
 
 const AccommodationDetail = ({ item }) => {
   const [ciudad, setCiudad] = useState(null);
   const [toggle, setToggle] = useState(false);
+  const [markerLocation, setMarkerLocation] = useState({    
+    lat: item.ubicacion.latitud,
+    lng: item.ubicacion.longitud,
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -74,6 +79,16 @@ const AccommodationDetail = ({ item }) => {
                     <p>{servicio.nombre}</p>
                   ))}
                 </div>
+                <div className="services flex-col">
+                  <h4 className="alter-title">Ubicación:</h4>
+                </div>
+                <div className="map-container">                
+                  <APIProvider apiKey={"AIzaSyBFLKMiiXt6JrABqPUCumPzI69x4AAixtU"}>
+                    <Map defaultZoom={13} defaultCenter={markerLocation} gestureHandling={"greedy"} disableDefaultUI>
+                      <Marker position={markerLocation} />
+                    </Map>
+                  </APIProvider>
+              </div>
               </>
             )}
           </div>
