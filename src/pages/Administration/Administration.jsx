@@ -31,6 +31,16 @@ const Administration = () => {
             tableParam="tipos-alojamientos"
           />
         );
+      case "servicios":
+        return (
+          <TableComponent
+            titles={["Id", "Nombre", "Acciones"]}
+            tableGet={`${tableUrl}servicio/getAllServicios`}
+            tableDelete={`${tableUrl}servicio/deleteServicio/`}
+            tableName="Servicios"
+            tableParam="servicios"
+          />
+        );
       default:
         return null;
     }
@@ -46,6 +56,15 @@ const Administration = () => {
           </button>
           <button className="tab-btn underline" onClick={() => setActiveTab("alojamientosTipo")}>
             Tipos de Alojamiento
+          </button>
+          <button className="tab-btn underline" onClick={() => setActiveTab("servicios")}>
+            Servicios
+          </button>
+          <button className="tab-btn underline" onClick={() => setActiveTab("servicios")}>
+            Alojamientos-Servicios
+          </button>
+          <button className="tab-btn underline" onClick={() => setActiveTab("servicios")}>
+            Imagenes
           </button>
         </div>
         <div className="tab-content">{renderTabContent()}</div>

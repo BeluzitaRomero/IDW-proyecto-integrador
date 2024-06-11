@@ -4,6 +4,7 @@ import FormAccommodation from "./FormAccommodation/FormAccommodation";
 import FormAccommodationType from "./FormAccommodationType/FormAccommodationType";
 import Banner from "../Banner/Banner";
 import adminImg from "../../assets/img/banner-admin.jpg";
+import FormService from "./FormService/FormService";
 
 const FormComponent = () => {
   const { formComponent } = useParams();
@@ -15,6 +16,8 @@ const FormComponent = () => {
         return <FormAccommodation />;
       case "tipos-alojamientos":
         return <FormAccommodationType id={formId} />;
+      case "servicios":
+        return <FormService id={formId} />;
       default:
         return null;
     }
