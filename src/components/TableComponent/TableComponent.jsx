@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import "./TableComponent.css";
 import Modal from "../Modal/Modal";
+import { getData, deleteData } from "../../utils/api";
 
 const TableComponent = ({
   titles,
@@ -16,15 +16,6 @@ const TableComponent = ({
   const [modalId, setModalId] = useState(null);
   const [modalMessage, setModalMessage] = useState();
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`${tableGet}`);
-      setData(response.data);
-    } catch (error) {
-      console.error("Error al recuperar los datos:", error);
-    }
-  };
-
   const handleDelete = (id, message) => {
     setModal(true);
     setModalId(id);
@@ -32,18 +23,17 @@ const TableComponent = ({
   };
 
   const handleDeleteConfirm = async (id) => {
-    try {
-      const response = await axios.delete(`${tableDelete}/${id}`);
-    } catch (error) {
-      console.error("Error al eliminar el dato:", error);
-    }
+    await deleteData(`${tableDelete + id}`);
+    const updateData = await getData(tableGet);
+    setData(updateData);
     setModal(false);
-    fetchData();
   };
 
   useEffect(() => {
-    fetchData();
-  }, [tableGet]);
+    getData(tableGet)
+      .then((res) => setData(res))
+      .catch((err) => console.error(`Error: ${err}`));
+  }, [tableName]);
 
   return (
     <>

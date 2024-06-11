@@ -5,19 +5,19 @@ import axios from "axios";
 import Modal from "../../Modal/Modal";
 import { getData } from "../../../utils/api";
 
-const FormAccommodationType = ({ id }) => {
+const FormService = ({ id }) => {
   const initialForm = {
-    Descripcion: "",
+    Nombre: "",
   };
 
   const [form, setForm] = useState(initialForm);
   const [modal, setModal] = useState(false);
   const [modalMessage, setModalMessage] = useState();
-  const apiUrl = "http://localhost:3001/tiposAlojamiento/";
+  const apiUrl = "http://localhost:3001/servicio/";
 
   const compareData = (resData, formData) => {
     return resData.some((data) => {
-      return formData.Descripcion.toLowerCase() === data.Descripcion.toLowerCase();
+      return formData.Nombre.toLowerCase() === data.Nombre.toLowerCase();
     });
   };
 
@@ -29,14 +29,14 @@ const FormAccommodationType = ({ id }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const responseData = await getData(`${apiUrl}getTiposAlojamiento/`);
+      const responseData = await getData(`${apiUrl}getAllServicios/`);
       if (compareData(responseData, form)) {
-        setModalMessage(`Tipo de alojamiento ya existente`);
+        setModalMessage(`Servicio ya existente`);
       } else {
         if (id) {
-          await axios.put(`${apiUrl}putTipoAlojamiento/${id}`, form);
+          await axios.put(`${apiUrl}updateServicio/${id}`, form);
         } else {
-          await axios.post(`${apiUrl}createTipoAlojamiento`, form);
+          await axios.post(`${apiUrl}createServicio`, form);
         }
         setModalMessage(`Tipo de alojamiento ${id ? "actualizado" : "creado"} con éxito`);
       }
@@ -49,7 +49,7 @@ const FormAccommodationType = ({ id }) => {
 
   useEffect(() => {
     if (id) {
-      getData(`${apiUrl}getTipoAlojamiento/${id}`)
+      getData(`${apiUrl}getServicio/${id}`)
         .then((res) => setForm(res))
         .catch((err) => console.error(`Error: ${err}`));
     }
@@ -57,11 +57,11 @@ const FormAccommodationType = ({ id }) => {
 
   return (
     <main className="m-y crud-form">
-      <h2 className="section-title">{id ? "Actualizar" : "Agregar"} Tipo de Alojamiento</h2>
+      <h2 className="section-title">{id ? "Actualizar" : "Agregar"} Servicio</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="Descripcion">Descripcion</label>
-          <input name="Descripcion" type="text" defaultValue={form.Descripcion} onChange={handleChange} />
+          <label htmlFor="Nombre">Nombre</label>
+          <input name="Nombre" type="text" defaultValue={form.Nombre} onChange={handleChange} />
         </div>
         <Link to="/administrar" className="btn cancel-button">
           Volver
@@ -82,4 +82,4 @@ const FormAccommodationType = ({ id }) => {
   );
 };
 
-export default FormAccommodationType;
+export default FormService;

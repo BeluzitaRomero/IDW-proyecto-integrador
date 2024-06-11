@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const getAccommodations = (dataList) =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -13,16 +15,29 @@ export const getAccommodationDetail = (data, id) =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       if (data.length) {
-        resolve(
-          data.find(
-            (accommodation) => accommodation.idAlojamiento === parseInt(id)
-          )
-        );
+        resolve(data.find((accommodation) => accommodation.idAlojamiento === parseInt(id)));
       } else {
         reject("Error");
       }
     }, 2000);
   });
+
+export const getData = async (url) => {
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+export const deleteData = async (url) => {
+  try {
+    await axios.delete(url);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
 
 /* El setTimeout lo pongo aca solamente como para
     simular un tiempo de respuesta de cuando se pide la data
@@ -44,8 +59,7 @@ export function obtenerCiudad(latitud, longitud) {
       return response.json();
     })
     .then((data) => {
-      const city =
-        data.address.city || data.address.suburb || data.address.town;
+      const city = data.address.city || data.address.suburb || data.address.town;
       return city;
     })
     .catch((error) => {
