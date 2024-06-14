@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
-import { getAccommodations } from "../../utils/api";
-import dataJson from "../../data/accommodations.json";
+import { getData } from "../../utils/api";
+//import dataJson from "../../data/accommodations.json";
 import Button from "../Button/Button";
 import Loading from "../Loading/Loading";
 
 const ItemListContainer = () => {
   const [accommodations, setAccommodations] = useState([]);
+  const fetchUrl = "http://localhost:3001/alojamiento/getAlojamientos";
 
   useEffect(() => {
-    getAccommodations(dataJson)
+    getData(fetchUrl)
       .then((res) => setAccommodations(res))
       .catch((err) => console.error(`${err}: no se encuentra informacion`));
   }, []);
