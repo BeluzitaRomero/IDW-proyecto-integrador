@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./TableComponent.css";
 import Modal from "../Modal/Modal";
 import { getData, deleteData } from "../../utils/api";
+import axios from "axios";
 
 const TableComponent = ({
   titles,
@@ -23,6 +24,30 @@ const TableComponent = ({
   };
 
   const handleDeleteConfirm = async (id) => {
+    const url = "http://localhost:3001/";
+
+    //si lo que se va a borrar es un alojamiento, primero eliminar los servicios
+    /*Esto es porque la base de datos no tiene activo "on delete cascade" para q
+    * cuando se elimina un registro, tambien se elimines sus relaciones
+   por eso el frontend tiene que dar mas vueltas para hacer el delete*/
+
+    if (tableDelete === `${url}alojamiento/deleteAlojamiento/`) {
+      const response = await axios.get(
+        `${url}alojamientosServicios/getAlojamientoServicio/${id}`
+      );
+
+      // Si hay servicios asociados, eliminarlos primero
+      if (response.data.length > 0) {
+        const deleteRequests = response.data.map((service) =>
+          axios.delete(
+            `http://localhost:3001/alojamientosServicios/deleteAlojamientoServicio/${service.idAlojamientoServicio}`
+          )
+        );
+
+        await Promise.all(deleteRequests);
+      }
+    }
+
     await deleteData(`${tableDelete + id}`);
     const updateData = await getData(tableGet);
     setData(updateData);

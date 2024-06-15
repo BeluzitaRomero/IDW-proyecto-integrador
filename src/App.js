@@ -8,7 +8,6 @@ import AccommodationDetailContainer from "./components/AccommodationDetailContai
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Administration from "./pages/Administration/Administration.jsx";
 import FormComponent from "./components/FormComponents/FormComponent.jsx";
-// import FormAccommodation from "./FormAccommodation/FormAccommodation";
 
 function App() {
   return (
