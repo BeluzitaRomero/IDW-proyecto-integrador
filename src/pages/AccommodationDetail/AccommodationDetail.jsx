@@ -17,12 +17,11 @@ const AccommodationDetail = ({ item }) => {
   const [accommodationType, setAccommodationType] = useState({});
   
   const [markerLocation, setMarkerLocation] = useState({    
-    lat: -41.13240000,
-    lng: -71.30960000,
+    lat: parseFloat(item.Latitud),
+    lng: parseFloat(item.Longitud),
   });
 
-  
-  const fetchUrl = `http://localhost:3001/tiposAlojamiento/getTipoAlojamiento/${item.idTipoAlojamiento}`;
+    const fetchUrl = `http://localhost:3001/tiposAlojamiento/getTipoAlojamiento/${item.idTipoAlojamiento}`;
 
   useEffect(() => {
     getData(fetchUrl)
