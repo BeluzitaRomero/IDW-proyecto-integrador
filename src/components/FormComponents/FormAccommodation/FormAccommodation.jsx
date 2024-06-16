@@ -9,13 +9,13 @@ const FormAccommodation = ({ id }) => {
   const [dataForm, setDataForm] = useState({
     Titulo: "",
     Descripcion: "",
-    TipoAlojamiento: null,
+    idTipoAlojamiento: null,
     Latitud: null,
     Longitud: null,
     PrecioPorDia: null,
     CantidadDormitorios: null,
     CantidadBanios: null,
-    Estado: "",
+    Estado: "Disponible",
   });
 
   const fetchUrl = "http://localhost:3001";
@@ -35,7 +35,7 @@ const FormAccommodation = ({ id }) => {
     setDataForm({
       Titulo: "",
       Descripcion: "",
-      TipoAlojamiento: "",
+      idTipoAlojamiento: "",
       Latitud: "",
       Longitud: "",
       PrecioPorDia: "",
@@ -49,9 +49,7 @@ const FormAccommodation = ({ id }) => {
     if (id) {
       const fetchData = async () => {
         try {
-          const response = await axios.get(
-            `${fetchUrl}/alojamiento/getAlojamiento/${id}`
-          );
+          const response = await axios.get(`${fetchUrl}/alojamiento/getAlojamiento/${id}`);
           setDataForm(response.data);
         } catch (error) {
           console.error("No se encontro un alojamiento con ese id:", error);
@@ -69,18 +67,14 @@ const FormAccommodation = ({ id }) => {
         .put(`${fetchUrl}/alojamiento/putAlojamiento/${id}`, dataForm)
         .then((response) => {
           // Manejar la respuesta exitosa aquí si es necesario
-          setModalMessage(
-            `Alojamiento ${id ? "actualizado" : "creado"} con éxito`
-          );
+          setModalMessage(`Alojamiento ${id ? "actualizado" : "creado"} con éxito`);
           setModal(true);
           clearForm();
           console.log("La solicitud PUT fue exitosa:", response);
         })
         .catch((error) => {
           // Manejar cualquier error que ocurra durante la solicitud
-          setModalMessage(
-            `Ocurrió un error al ${id ? "actualizar" : "crear"} el alojamiento`
-          );
+          setModalMessage(`Ocurrió un error al ${id ? "actualizar" : "crear"} el alojamiento`);
           setModal(true);
           console.error("Hubo un error al realizar la solicitud PUT:", error);
         });
@@ -105,15 +99,11 @@ const FormAccommodation = ({ id }) => {
           return res.json();
         })
         .then((data) => {
-          setModalMessage(
-            `Alojamiento ${id ? "actualizado" : "creado"} con éxito`
-          );
+          setModalMessage(`Alojamiento ${id ? "actualizado" : "creado"} con éxito`);
           clearForm();
         })
         .catch((error) => {
-          setModalMessage(
-            `Ocurrió un error al ${id ? "actualizar" : "crear"} el alojamiento`
-          );
+          setModalMessage(`Ocurrió un error al ${id ? "actualizar" : "crear"} el alojamiento`);
         });
       setModal(true);
     }
@@ -121,91 +111,43 @@ const FormAccommodation = ({ id }) => {
 
   return (
     <main className="m-y crud-form">
-      <h2 className="section-title">
-        {id ? "Actualizar" : "Agregar"} Alojamiento
-      </h2>
+      <h2 className="section-title">{id ? "Actualizar" : "Agregar"} Alojamiento</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="Titulo">Titulo</label>
-          <input
-            name="Titulo"
-            type="text"
-            defaultValue={dataForm.Titulo}
-            onChange={handleChange}
-          />
+          <input name="Titulo" type="text" defaultValue={dataForm.Titulo} onChange={handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="Descripcion">Descripción</label>
-          <input
-            name="Descripcion"
-            type="text"
-            defaultValue={dataForm.Descripcion}
-            onChange={handleChange}
-          />
+          <input name="Descripcion" type="text" defaultValue={dataForm.Descripcion} onChange={handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="TipoAlojamiento">Tipo de alojamiento</label>
-          <input
-            name="TipoAlojamiento"
-            type="number"
-            defaultValue={dataForm.TipoAlojamiento}
-            onChange={handleChange}
-          />
+          <input name="TipoAlojamiento" type="number" defaultValue={dataForm.TipoAlojamiento} onChange={handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="Latitud">Latitud</label>
-          <input
-            name="Latitud"
-            type="number"
-            defaultValue={dataForm.Latitud}
-            onChange={handleChange}
-          />
+          <input name="Latitud" type="number" defaultValue={dataForm.Latitud} onChange={handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="Longitud">Longitud</label>
-          <input
-            name="Longitud"
-            type="number"
-            defaultValue={dataForm.Longitud}
-            onChange={handleChange}
-          />
+          <input name="Longitud" type="number" defaultValue={dataForm.Longitud} onChange={handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="PrecioPorDia">Precio por día</label>
-          <input
-            name="PrecioPorDia"
-            type="number"
-            defaultValue={dataForm.PrecioPorDia}
-            onChange={handleChange}
-          />
+          <input name="PrecioPorDia" type="number" defaultValue={dataForm.PrecioPorDia} onChange={handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="CantidadDormitorios">Cantidad de dormitorios</label>
-          <input
-            name="CantidadDormitorios"
-            type="number"
-            defaultValue={dataForm.CantidadDormitorios}
-            onChange={handleChange}
-          />
+          <input name="CantidadDormitorios" type="number" defaultValue={dataForm.CantidadDormitorios} onChange={handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="CantidadBanios">Cantidad de baños</label>
-          <input
-            name="CantidadBanios"
-            type="number"
-            defaultValue={dataForm.CantidadBanios}
-            onChange={handleChange}
-            min={"0"}
-          />
+          <input name="CantidadBanios" type="number" defaultValue={dataForm.CantidadBanios} onChange={handleChange} min={"0"} />
         </div>
         <div className="form-group">
           <label htmlFor="Estado">Estado:</label>
-          <select
-            name="Estado"
-            value={dataForm.Estado}
-            onChange={handleChange}
-            required
-          >
+          <select name="Estado" value={dataForm.Estado} onChange={handleChange} required>
             <option value="Disponible">Disponible</option>
             <option value="Reservado">Reservado</option>
           </select>

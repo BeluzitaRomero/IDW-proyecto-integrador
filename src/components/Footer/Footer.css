@@ -73,3 +73,23 @@ hr.long-line {
   width: 250px;
   font-family: Montserrat, sans-serif;
 }
+
+@media (max-width: 720px) {
+  .links-footer {
+    gap: 1.5rem;
+  }
+  .links-footer .columna-footer p {
+    text-align: center;
+  }
+  .links-footer form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1.5rem;
+  }
+  .links-footer form input {
+    margin: 0;
+  }
+}

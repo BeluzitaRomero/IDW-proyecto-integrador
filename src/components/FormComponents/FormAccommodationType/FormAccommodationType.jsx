@@ -28,6 +28,11 @@ const FormAccommodationType = ({ id }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!form.Descripcion) {
+      setModalMessage("Por favor completa todos los campos");
+      setModal(true);
+      return;
+    }
     try {
       const responseData = await getData(`${apiUrl}getTiposAlojamiento/`);
       if (compareData(responseData, form)) {
@@ -71,11 +76,14 @@ const FormAccommodationType = ({ id }) => {
         </button>
       </form>
       {modal && (
-        <Modal>
+        <Modal
+          accept={() => {
+            setModal(false);
+          }}
+          cancel={() => {
+            <Link to="/administrar"></Link>;
+          }}>
           {modalMessage}
-          <Link to="/administrar" className="btn secondary-button">
-            Volver
-          </Link>
         </Modal>
       )}
     </main>

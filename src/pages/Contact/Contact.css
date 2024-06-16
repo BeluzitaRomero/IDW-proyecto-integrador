@@ -1,6 +1,5 @@
 .m-contact {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-    url("../../assets/img/banner-contact.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url("../../assets/img/banner-contact.jpg");
 }
 .formulario {
   background-color: #fff;
@@ -16,6 +15,7 @@
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  font-size: 1rem;
 }
 
 .formulario input[type="text"],
@@ -54,7 +54,7 @@ select:focus {
 
 fieldset {
   border: 1px solid #ccc;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 legend {
@@ -70,7 +70,8 @@ table {
   text-align: left;
 }
 
-th, td {
+th,
+td {
   padding: 12px 15px;
   border: 1px solid #ddd;
 }
