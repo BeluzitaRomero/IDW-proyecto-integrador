@@ -3,7 +3,7 @@ import TableComponent from "../../components/TableComponent/TableComponent";
 import adminImg from "../../assets/img/banner-admin.jpg";
 import Banner from "../../components/Banner/Banner";
 import "./Administration.css";
-import AccomodationTab from "../../components/Tabs/AccommodationTab/AccomodationTab";
+import AccommodationTab from "../../components/Tabs/AccommodationTab/AccommodationTab";
 import AccommodationTypeTab from "../../components/Tabs/AccommodationTypeTab/AccommodationTypeTab";
 
 const Administration = () => {
@@ -14,7 +14,7 @@ const Administration = () => {
   const renderTabContent = () => {
     switch (activeTab) {
       case "alojamientos":
-        return <AccomodationTab tableUrl={tableUrl} />;
+        return <AccommodationTab tableUrl={tableUrl} />;
       case "alojamientosTipo":
         return <AccommodationTypeTab tableUrl={tableUrl} />;
       case "servicios":

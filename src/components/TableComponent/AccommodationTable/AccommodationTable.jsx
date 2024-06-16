@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "../../Modal/Modal";
 import { getData, deleteData } from "../../../utils/api";
 
-const AccomodationTable = ({ accommodations }) => {
-  const [accommodationsType, setAccommodationsType] = useState();
-  const [accommodationType, setAccommodationType] = useState();
+const AccommodationTable = ({ accommodations, accommodationsType }) => {
   const [filter, setFilter] = useState([]);
 
   const [modal, setModal] = useState(false);
@@ -37,13 +35,6 @@ const AccomodationTable = ({ accommodations }) => {
       (!filter.Selec || String(accommodation.idTipoAlojamiento) === filter.Selec)
     );
   });
-
-  useEffect(() => {
-    getData(`http://localhost:3001/tiposAlojamiento/getTiposAlojamiento/`)
-      .then((res) => setAccommodationsType(res))
-      .catch((err) => console.error(`Error: ${err}`));
-  }, [accommodations]);
-  console.log(accommodations[0].tipoAlojamiento);
   return (
     <>
       <div className="flex-space">
@@ -52,11 +43,10 @@ const AccomodationTable = ({ accommodations }) => {
           Agregar +
         </Link>
       </div>
-      <div className="flex-space">
-        a
-        <input type="text" placeholder="Titulo" name="Titulo" onChange={handleFilter} />
-        <input type="text" placeholder="Descripcion" name="Descripcion" onChange={handleFilter} />
-        <select name="Selec" id="" onChange={handleFilter}>
+      <div className="flex-space crud-inputs">
+        <input type="text" placeholder="Titulo" name="Titulo" onChange={handleFilter} className="crud-input" />
+        <input type="text" placeholder="Descripcion" name="Descripcion" onChange={handleFilter} className="crud-input" />
+        <select name="Selec" id="" onChange={handleFilter} className="crud-input">
           <option value="">Tipo</option>
           {accommodationsType &&
             accommodationsType.map((type) => (
@@ -95,7 +85,7 @@ const AccomodationTable = ({ accommodations }) => {
                 <td>{accommodation.CantidadDormitorios}</td>
                 <td>{accommodation.CantidadBanios}</td>
                 <td>{accommodation.Estado}</td>
-                <td>{accommodationsType.find((a) => a.idTipoAlojamiento === accommodation.idTipoAlojamiento).Descripcion}</td>
+                <td>{accommodationsType && accommodationsType.find((a) => a.idTipoAlojamiento === accommodation.idTipoAlojamiento).Descripcion}</td>
                 <td className="flex-center">
                   <Link to={`/alojamiento/${accommodation.idAlojamiento}`} className="icon-btn fa-solid fa-arrow-up-right-from-square"></Link>
                   <Link to={`/editar/alojamientos/${accommodation.idAlojamiento}`} className="icon-btn fa-solid fa-solid fa-pen-to-square"></Link>
@@ -123,4 +113,4 @@ const AccomodationTable = ({ accommodations }) => {
   );
 };
 
-export default AccomodationTable;
+export default AccommodationTable;
