@@ -9,45 +9,56 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { carouselSettings } from "../../utils/carouselSettings";
 import { Map, Marker, APIProvider} from "@vis.gl/react-google-maps";
+import { getData } from "../../utils/api";
 
-const AccommodationDetail = ({ item }) => {
+const AccommodationDetail = ({ item }) => {  
   const [ciudad, setCiudad] = useState(null);
   const [toggle, setToggle] = useState(false);
+  const [accommodationType, setAccommodationType] = useState({});
+  
   const [markerLocation, setMarkerLocation] = useState({    
-    lat: item.ubicacion.latitud,
-    lng: item.ubicacion.longitud,
+    lat: parseFloat(item.Latitud),
+    lng: parseFloat(item.Longitud),
   });
+
+    const fetchUrl = `http://localhost:3001/tiposAlojamiento/getTipoAlojamiento/${item.idTipoAlojamiento}`;
+
+  useEffect(() => {
+    getData(fetchUrl)
+      .then((res) => setAccommodationType(res))
+      .catch((err) => console.error(`${err}: no encontrado`));
+  }, [accommodationType]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    obtenerCiudad(item.ubicacion.latitud, item.ubicacion.longitud)
+    obtenerCiudad(item.Latitud, item.Longitud)
       .then((res) => setCiudad(res))
       .catch((err) => console.error("Error:", err));
-  }, [item.ubicacion.latitud, item.ubicacion.longitud]);
+  }, [item.Latitud, item.Longitud]);
 
   return (
     <>
-      <Banner
+      {/* <Banner
         imagen={
           item.imagenes.find((element) => element.cover === true).rutaArchivo
         }
-      />
+      /> */}
       <main className="m-y">
         <section className="title-container flex-col">
           <div className="title-section flex-col">
-            <h1 className="main-title">{item.titulo}</h1>
+            <h1 className="main-title">{item.Titulo}</h1>
             <h2 className="alter-title">
-              {item.disponible ? "Disponible" : "Reservado"} • $
-              {item.precioPorDia} por dia
+              {item.Estado ? "Disponible" : "Reservado"} • $
+              {item.PrecioPorDia} por dia
             </h2>
           </div>
         </section>
         <section className="detail-container">
           <div className="detail-section flex-col">
             <h3 className="alter-title">
-              {item.tipoAlojamiento} • {ciudad}
+              {accommodationType.Descripcion} • {ciudad}
             </h3>
-            <p>{item.descripcion}</p>
+            <p>{item.Descripcion}</p>
             <div className="toggle-container">
               <h4 className="alter-title">ver caracteristícas</h4>
               <button
@@ -62,7 +73,7 @@ const AccommodationDetail = ({ item }) => {
                   <img src={bedIcon} alt="Habitaciones" />
                   <p className="">
                     Cantidad de Dormitorios:
-                    <span className="bold"> {item.cantidadDormitorios}</span>
+                    <span className="bold"> {item.CantidadDormitorios}</span>
                   </p>
                 </div>
 
@@ -70,20 +81,20 @@ const AccommodationDetail = ({ item }) => {
                   <img src={toiletIcon} alt="Baños" />
                   <p className="">
                     Cantidad de Baños:
-                    <span className="bold"> {item.cantidadBanios}</span>
+                    <span className="bold"> {item.CantidadBanios}</span>
                   </p>
                 </div>
                 <div className="services flex-col">
                   <h4 className="alter-title">Servicios:</h4>
-                  {item.servicios.map((servicio) => (
-                    <p>{servicio.nombre}</p>
-                  ))}
+                  {/* {item.Servicios.map((servicio) => (
+                    <p>{servicio.Nombre}</p>
+                  ))} */}
                 </div>
                 <div className="services flex-col">
                   <h4 className="alter-title">Ubicación:</h4>
                 </div>
                 <div className="map-container">                
-                  <APIProvider apiKey={"AIzaSyBFLKMiiXt6JrABqPUCumPzI69x4AAixtU"}>
+                  <APIProvider apiKey={"AIzaSyDZmqbRMOVEJcGQj7g9Ssin-wWcYPMGoxM"}>
                     <Map defaultZoom={13} defaultCenter={markerLocation} gestureHandling={"greedy"} disableDefaultUI>
                       <Marker position={markerLocation} />
                     </Map>
@@ -92,13 +103,13 @@ const AccommodationDetail = ({ item }) => {
               </>
             )}
           </div>
-          <Slider {...carouselSettings} className="slider-container">
+          {/* <Slider {...carouselSettings} className="slider-container">
             {item.imagenes.map((imagen) => (
               <div>
                 <img src={imagen.rutaArchivo} alt="" />
               </div>
             ))}
-          </Slider>
+          </Slider> */}
         </section>
       </main>
     </>
