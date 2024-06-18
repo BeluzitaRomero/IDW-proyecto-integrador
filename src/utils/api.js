@@ -1,16 +1,5 @@
 import axios from "axios";
-import {
-  setKey,
-  setDefaults,
-  setLanguage,
-  setRegion,
-  fromAddress,
-  fromLatLng,
-  fromPlaceId,
-  setLocationType,
-  geocode,
-  RequestType,
-} from "react-geocode";
+import {  geocode } from "react-geocode";
 
 export const getAccommodations = (dataList) =>
   new Promise((resolve, reject) => {
@@ -78,22 +67,4 @@ export function obtenerCiudad(latitud, longitud) {
       console.error("Error al obtener la ciudad:", error);
       return null;
     });
-//  const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitud}&lon=${longitud}&zoom=18&addressdetails=1`;
-//const apiUrl = `  `;
-
-  // return fetch(apiUrl)
-  //   .then((response) => {
-  //     if (!response.ok) {
-  //       throw new Error("Error al obtener la respuesta de la API");
-  //     }
-  //     return response.json();
-  //   })
-  //   .then((data) => {
-  //     const city = data.address.city || data.address.suburb || data.address.town;
-  //     return city;
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error al obtener la ciudad:", error);
-  //     return null;
-  //   });
 }
