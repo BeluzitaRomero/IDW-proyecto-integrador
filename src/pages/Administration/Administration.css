@@ -11,3 +11,9 @@
   font-weight: 600;
   cursor: pointer;
 }
+
+@media (max-width: 720px) {
+  .tab-btn {
+    width: 100%;
+  }
+}

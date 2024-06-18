@@ -21,13 +21,22 @@ const FormService = ({ id }) => {
     });
   };
 
+  const validateForm = () => {
+    return Object.values(form).every((value) => value !== "");
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      setModalMessage("Por favor completa todos los campos");
+      setModal(true);
+      return;
+    }
     try {
       const responseData = await getData(`${apiUrl}getAllServicios/`);
       if (compareData(responseData, form)) {
@@ -38,11 +47,11 @@ const FormService = ({ id }) => {
         } else {
           await axios.post(`${apiUrl}createServicio`, form);
         }
-        setModalMessage(`Tipo de alojamiento ${id ? "actualizado" : "creado"} con éxito`);
+        setModalMessage(`Servicio ${id ? "actualizado" : "creado"} con éxito`);
       }
     } catch (error) {
       console.error("Error:", error);
-      setModalMessage(`Ocurrió un error al ${id ? "actualizar" : "crear"} el tipo de alojamiento`);
+      setModalMessage(`Ocurrió un error al ${id ? "actualizar" : "crear"} el servicio`);
     }
     setModal(true);
   };
