@@ -311,23 +311,6 @@ const FormAccommodation = ({ id }) => {
             <option value="Reservado">Reservado</option>
           </select>
         </div>
-
-        {/* Añadir sección para seleccionar servicios */}
-        {/* <div className="form-group">
-          <label htmlFor="Servicios">Servicios:</label>
-          {services.map((service) => (
-            <div key={service.idServicio}>
-              <label>{service.Nombre}</label>
-              <input
-                type="checkbox"
-                value={service.idServicio}
-                checked={selectedServices.includes(service.idServicio)}
-                onChange={handleServiceChange}
-              />
-            </div>
-          ))}
-        </div> */}
-
         <h2 className="title-secondary">
           Selecciona los servicios para este alojamiento:
         </h2>
