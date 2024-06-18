@@ -55,7 +55,7 @@ const AccommodationDetail = ({ item }) => {
         <section className="detail-container">
           <div className="detail-section flex-col">
             <h3 className="alter-title">
-              {accommodationType.Descripcion} • {ciudad}
+              {accommodationType.Descripcion} • {ciudad ? ciudad : "cargando"}
             </h3>
             <p>{item.Descripcion}</p>
             <div className="toggle-container">

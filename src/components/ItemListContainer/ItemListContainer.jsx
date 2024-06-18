@@ -49,8 +49,8 @@ const ItemListContainer = () => {
 
   return (
     <>
-      <div className="flex-space">
-        <select name="tipoAlojamiento" id="" onChange={handleFilter} className="crud-input">
+      <div className="filtroHome">
+        <select name="tipoAlojamiento" id="" onChange={handleFilter} className="">
           <option value="">Tipo</option>
           {accommodationsType &&
             accommodationsType.map((type) => (
@@ -59,16 +59,17 @@ const ItemListContainer = () => {
               </option>
             ))}
         </select>
-        <select name="Estado" id="" onChange={handleFilter} className="crud-input">
+        <select name="Estado" id="" onChange={handleFilter} className="">
           <option value="">Disponibilidad</option>
           <option value="Disponible">Disponible</option>
           <option value="Reservado">Reservado</option>
         </select>
-        <div className="crud-input">
+        <div className="">
           <input type="range" name="rangoPrecio" min="0" max="13000" step="1" onChange={handleFilter} />
           <p>{filter.rangoPrecio}</p>
         </div>
-        <div className="flex-center crud-input">
+        <div className="flex-center">
+          <p>dormitorios</p>
           <button onClick={() => setCountDormitorios((prev) => prev - 1)} disabled={countDormitorios <= 0 ? true : false}>
             -
           </button>
@@ -77,6 +78,7 @@ const ItemListContainer = () => {
           <button onClick={() => setCountDormitorios((prev) => prev + 1)}>+</button>
         </div>
         <div className="flex-center">
+          <p>baños</p>
           <button onClick={() => setCountBanios((prev) => prev - 1)} disabled={countBanios <= 0 ? true : false}>
             -
           </button>
