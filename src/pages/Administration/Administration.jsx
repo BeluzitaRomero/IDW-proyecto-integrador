@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import TableComponent from "../../components/TableComponent/TableComponent";
 import adminImg from "../../assets/img/banner-admin.jpg";
 import Banner from "../../components/Banner/Banner";
 import "./Administration.css";
+import AccommodationTab from "../../components/Tabs/AccommodationTab/AccommodationTab";
+import AccommodationTypeTab from "../../components/Tabs/AccommodationTypeTab/AccommodationTypeTab";
+import ServicesTab from "../../components/Tabs/ServicesTab/ServicesTab";
 
 const Administration = () => {
   const [activeTab, setActiveTab] = useState("alojamientos");
@@ -12,47 +14,9 @@ const Administration = () => {
   const renderTabContent = () => {
     switch (activeTab) {
       case "alojamientos":
-        return (
-          <TableComponent
-            titles={[
-              "Id",
-              "Titulo",
-              "Descripción",
-              "Latitud",
-              "Longitud",
-              "Precio",
-              "Dormitorios",
-              "Baños",
-              "Disponible",
-              "Tipo",
-              "Acciones",
-            ]}
-            tableGet={`${tableUrl}alojamiento/getAlojamientos`}
-            tableDelete={`${tableUrl}alojamiento/deleteAlojamiento/`}
-            tableName="Alojamientos"
-            tableParam="alojamientos"
-          />
-        );
+        return <AccommodationTab tableUrl={tableUrl} />;
       case "alojamientosTipo":
-        return (
-          <TableComponent
-            titles={["Id", "Descripción", "Acciones"]}
-            tableGet={`${tableUrl}tiposAlojamiento/getTiposAlojamiento`}
-            tableDelete={`${tableUrl}tiposAlojamiento/deleteTipoAlojamiento/`}
-            tableName="Tipos de Alojamientos"
-            tableParam="tipos-alojamientos"
-          />
-        );
-      case "servicios":
-        return (
-          <TableComponent
-            titles={["Id", "Nombre", "Acciones"]}
-            tableGet={`${tableUrl}servicio/getAllServicios`}
-            tableDelete={`${tableUrl}servicio/deleteServicio/`}
-            tableName="Servicios"
-            tableParam="servicios"
-          />
-        );
+        return <AccommodationTypeTab tableUrl={tableUrl} />;
       case "alojamientos-servicios":
         return (
           //Aca no deberia tener el boton de agregar y modificar
@@ -69,6 +33,8 @@ const Administration = () => {
             tableParam="alojamientos-servicios"
           />
         );
+        case "servicios":
+        return <ServicesTab tableUrl={tableUrl} />;
       default:
         return null;
     }
@@ -79,16 +45,10 @@ const Administration = () => {
       <Banner imagen={adminImg} titulo="Administrador de alojamientos" />
       <main className="m-y main-content">
         <div className="tabs">
-          <button
-            className="tab-btn underline"
-            onClick={() => setActiveTab("alojamientos")}
-          >
+          <button className="tab-btn underline" onClick={() => setActiveTab("alojamientos")}>
             Alojamientos
           </button>
-          <button
-            className="tab-btn underline"
-            onClick={() => setActiveTab("alojamientosTipo")}
-          >
+          <button className="tab-btn underline" onClick={() => setActiveTab("alojamientosTipo")}>
             Tipos de Alojamiento
           </button>
           <button
@@ -97,6 +57,7 @@ const Administration = () => {
           >
             Servicios
           </button>
+
           <button
             className="tab-btn underline"
             onClick={() => setActiveTab("alojamientos-servicios")}

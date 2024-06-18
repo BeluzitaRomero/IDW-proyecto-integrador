@@ -26,6 +26,7 @@ const FormAccommodation = ({ id }) => {
     CantidadBanios: "",
     Estado: "Disponible",
     idTipoAlojamiento: "",
+
   });
 
   const fetchUrl = "http://localhost:3001";
@@ -61,7 +62,7 @@ const FormAccommodation = ({ id }) => {
     setDataForm({
       Titulo: "",
       Descripcion: "",
-      TipoAlojamiento: "",
+      idTipoAlojamiento: "",
       Latitud: "",
       Longitud: "",
       PrecioPorDia: "",
@@ -301,12 +302,7 @@ const FormAccommodation = ({ id }) => {
         </div>
         <div className="form-group">
           <label htmlFor="Estado">Estado:</label>
-          <select
-            name="Estado"
-            value={dataForm.Estado}
-            onChange={handleChange}
-            required
-          >
+          <select name="Estado" value={dataForm.Estado} onChange={handleChange} required>
             <option value="Disponible">Disponible</option>
             <option value="Reservado">Reservado</option>
           </select>

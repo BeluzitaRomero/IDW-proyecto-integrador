@@ -21,13 +21,22 @@ const FormAccommodationType = ({ id }) => {
     });
   };
 
+  const validateForm = () => {
+    return Object.values(form).every((value) => value !== "");
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      setModalMessage("Por favor completa todos los campos");
+      setModal(true);
+      return;
+    }
     try {
       const responseData = await getData(`${apiUrl}getTiposAlojamiento/`);
       if (compareData(responseData, form)) {
@@ -38,6 +47,7 @@ const FormAccommodationType = ({ id }) => {
         } else {
           await axios.post(`${apiUrl}createTipoAlojamiento`, form);
         }
+
         setModalMessage(`Tipo de alojamiento ${id ? "actualizado" : "creado"} con éxito`);
       }
     } catch (error) {

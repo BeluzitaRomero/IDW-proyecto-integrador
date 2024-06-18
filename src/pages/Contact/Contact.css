@@ -1,32 +1,31 @@
-.m-contact {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-    url("../../assets/img/banner-contact.jpg");
-}
-.formulario {
+.contact-form {
   background-color: #fff;
   width: 80%;
   max-width: 500px;
-  margin: 20px auto;
   padding: 20px;
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+.contact-form .section-title {
+  margin-bottom: 1rem;
+}
 
-.formulario legend {
+.contact-form legend {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  font-size: 1rem;
 }
 
-.formulario input[type="text"],
-.formulario input[type="email"],
-.formulario textarea {
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
   width: 100%;
   padding: 5px;
   margin-bottom: 10px;
 }
 
-.formulario textarea {
+.contact-form textarea {
   height: 100px;
   resize: vertical;
 }
@@ -38,69 +37,68 @@ textarea {
   border: none;
 }
 
-label {
+.contact-form label {
   background-color: #fff;
 }
 
-input {
-  width: 100%;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
   outline: none;
 }
 
-fieldset {
+.contact-form fieldset {
   border: 1px solid #ccc;
-  margin-bottom: .5rem;
+  margin-bottom: 1rem;
 }
 
-legend {
+.contact-form legend {
   margin-left: 10px;
 }
 
 /* Basic table styling */
-table {
+.contact-table {
   width: 40%;
   border-collapse: collapse;
   margin: 20px 0;
-  font-size: 15px;
+  font-size: 1rem;
   text-align: left;
 }
 
-th, td {
+.contact-table th,
+.contact-table td {
   padding: 12px 15px;
   border: 1px solid #ddd;
 }
 
 /* Responsive table */
 @media (max-width: 768px) {
-  table,
-  thead,
-  tbody,
-  th,
-  td,
-  tr {
+  .contact-table,
+  .contact-table thead,
+  .contact-table tbody,
+  .contact-table th,
+  .contact-table td,
+  .contact-table tr {
     display: block;
   }
-
-  thead tr {
+  .contact-table {
+    width: 80%;
+  }
+  .contact-table thead tr {
     display: none;
   }
 
-  tr {
+  .contact-table tr {
     margin-bottom: 15px;
   }
 
-  td {
+  .contact-table td {
     text-align: right;
     padding-left: 50%;
     position: relative;
   }
 
-  td::before {
+  .contact-table td::before {
     content: attr(data-label);
     position: absolute;
     left: 0;
