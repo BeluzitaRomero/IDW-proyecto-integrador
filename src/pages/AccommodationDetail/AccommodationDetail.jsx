@@ -8,7 +8,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { carouselSettings } from "../../utils/carouselSettings";
-import { Map, Marker, APIProvider} from "@vis.gl/react-google-maps";
+import { Map, AdvancedMarker, APIProvider} from "@vis.gl/react-google-maps";
 import { getData } from "../../utils/api";
 
 const AccommodationDetail = ({ item }) => {  
@@ -95,8 +95,8 @@ const AccommodationDetail = ({ item }) => {
                 </div>
                 <div className="map-container">                
                   <APIProvider apiKey={"AIzaSyDZmqbRMOVEJcGQj7g9Ssin-wWcYPMGoxM"}>
-                    <Map defaultZoom={13} defaultCenter={markerLocation} gestureHandling={"greedy"} disableDefaultUI>
-                      <Marker position={markerLocation} />
+                    <Map defaultZoom={13} defaultCenter={markerLocation} gestureHandling={"greedy"} disableDefaultUI mapId="MAP_ID">
+                      <AdvancedMarker position={markerLocation} />
                     </Map>
                   </APIProvider>
               </div>
