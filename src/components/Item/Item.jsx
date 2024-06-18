@@ -9,7 +9,7 @@ import { obtenerCiudad } from "../../utils/api";
 const Item = ({ item }) => {
   //Agregado de esto para poder transformar latitud y longitud en ciudad
   //la funcion esta definida en utils
-  const [ciudad, setCiudad] = useState(null);  
+  const [ciudad, setCiudad] = useState(null);
   const [accommodationType, setAccommodationType] = useState();
 
   const fetchUrl = `http://localhost:3001/tiposAlojamiento/getTipoAlojamiento/${item.idTipoAlojamiento}`;
@@ -18,7 +18,7 @@ const Item = ({ item }) => {
     getData(fetchUrl)
       .then((res) => setAccommodationType(res))
       .catch((err) => console.error(`${err}: no encontrado`));
-  }, [accommodationType]);
+  }, [fetchUrl]);
 
   useEffect(() => {
     obtenerCiudad(item.Latitud, item.Longitud)
@@ -31,13 +31,13 @@ const Item = ({ item }) => {
       <Link to={`/alojamiento/${item.idAlojamiento}`} className="link">
         <div className="card-container">
           <figure>
-            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRbcrj53mGyk-u4JwrIb6z1RBAeCpxR78gfQ&s' alt={item.Titulo} />            
-            {item.Estado ? (
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRbcrj53mGyk-u4JwrIb6z1RBAeCpxR78gfQ&s" alt={item.Titulo} />
+            {item.Estado === "Disponible" ? (
               <figcaption className="available">Disponible</figcaption>
             ) : (
               <figcaption className="no-available">Reservado</figcaption>
             )}
-          </figure>{" "}
+          </figure>
           <div className="card-info">
             <p className="card-category italic">{accommodationType && accommodationType.Descripcion}</p>
             <h3 className="card-title">{item.Titulo}</h3>

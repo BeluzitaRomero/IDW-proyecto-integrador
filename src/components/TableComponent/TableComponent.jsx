@@ -50,7 +50,9 @@ const TableComponent = ({ titles, tableGet, tableDelete, tableName, tableParam }
           {data.map((singleData, index) => (
             <tr key={index}>
               {Object.values(singleData).map((value, i) => (
-                <td key={i}>{value}</td>
+                <td data-label={titles[i]} key={i}>
+                  {value}
+                </td>
               ))}
               <td className="flex-center">
                 {tableName === "Alojamientos" && (

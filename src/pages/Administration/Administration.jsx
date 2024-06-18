@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import TableComponent from "../../components/TableComponent/TableComponent";
 import adminImg from "../../assets/img/banner-admin.jpg";
 import Banner from "../../components/Banner/Banner";
 import "./Administration.css";
 import AccommodationTab from "../../components/Tabs/AccommodationTab/AccommodationTab";
 import AccommodationTypeTab from "../../components/Tabs/AccommodationTypeTab/AccommodationTypeTab";
+import ServicesTab from "../../components/Tabs/ServicesTab/ServicesTab";
 
 const Administration = () => {
   const [activeTab, setActiveTab] = useState("alojamientos");
@@ -18,15 +18,7 @@ const Administration = () => {
       case "alojamientosTipo":
         return <AccommodationTypeTab tableUrl={tableUrl} />;
       case "servicios":
-        return (
-          <TableComponent
-            titles={["Id", "Nombre"]}
-            tableGet={`${tableUrl}servicio/getAllServicios`}
-            tableDelete={`${tableUrl}servicio/deleteServicio/`}
-            tableName="Servicios"
-            tableParam="servicios"
-          />
-        );
+        return <ServicesTab tableUrl={tableUrl} />;
       default:
         return null;
     }

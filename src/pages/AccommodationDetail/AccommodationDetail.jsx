@@ -8,26 +8,26 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { carouselSettings } from "../../utils/carouselSettings";
-import { Map, Marker, APIProvider} from "@vis.gl/react-google-maps";
+import { Map, Marker, APIProvider } from "@vis.gl/react-google-maps";
 import { getData } from "../../utils/api";
 
-const AccommodationDetail = ({ item }) => {  
+const AccommodationDetail = ({ item }) => {
   const [ciudad, setCiudad] = useState(null);
   const [toggle, setToggle] = useState(false);
   const [accommodationType, setAccommodationType] = useState({});
-  
-  const [markerLocation, setMarkerLocation] = useState({    
+
+  const [markerLocation, setMarkerLocation] = useState({
     lat: parseFloat(item.Latitud),
     lng: parseFloat(item.Longitud),
   });
 
-    const fetchUrl = `http://localhost:3001/tiposAlojamiento/getTipoAlojamiento/${item.idTipoAlojamiento}`;
+  const fetchUrl = `http://localhost:3001/tiposAlojamiento/getTipoAlojamiento/${item.idTipoAlojamiento}`;
 
   useEffect(() => {
     getData(fetchUrl)
       .then((res) => setAccommodationType(res))
       .catch((err) => console.error(`${err}: no encontrado`));
-  }, [accommodationType]);
+  }, [fetchUrl]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -48,8 +48,7 @@ const AccommodationDetail = ({ item }) => {
           <div className="title-section flex-col">
             <h1 className="main-title">{item.Titulo}</h1>
             <h2 className="alter-title">
-              {item.Estado ? "Disponible" : "Reservado"} • $
-              {item.PrecioPorDia} por dia
+              {item.Estado ? "Disponible" : "Reservado"} • ${item.PrecioPorDia} por dia
             </h2>
           </div>
         </section>
@@ -61,11 +60,7 @@ const AccommodationDetail = ({ item }) => {
             <p>{item.Descripcion}</p>
             <div className="toggle-container">
               <h4 className="alter-title">ver caracteristícas</h4>
-              <button
-                className={`icon-btn fa-solid fa-chevron-right ${
-                  toggle ? "rotate" : "unrotate"
-                }`}
-                onClick={() => setToggle(!toggle)}></button>
+              <button className={`icon-btn fa-solid fa-chevron-right ${toggle ? "rotate" : "unrotate"}`} onClick={() => setToggle(!toggle)}></button>
             </div>
             {toggle && (
               <>
@@ -93,13 +88,13 @@ const AccommodationDetail = ({ item }) => {
                 <div className="services flex-col">
                   <h4 className="alter-title">Ubicación:</h4>
                 </div>
-                <div className="map-container">                
+                <div className="map-container">
                   <APIProvider apiKey={"AIzaSyDZmqbRMOVEJcGQj7g9Ssin-wWcYPMGoxM"}>
                     <Map defaultZoom={13} defaultCenter={markerLocation} gestureHandling={"greedy"} disableDefaultUI>
                       <Marker position={markerLocation} />
                     </Map>
                   </APIProvider>
-              </div>
+                </div>
               </>
             )}
           </div>
