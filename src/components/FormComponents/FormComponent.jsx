@@ -25,7 +25,7 @@ const FormComponent = () => {
   return (
     <>
       <Banner imagen={adminImg} titulo="Formulario" />
-      <>{renderForm()}</>
+      {renderForm()}
     </>
   );
 };

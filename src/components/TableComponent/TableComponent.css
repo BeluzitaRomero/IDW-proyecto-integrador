@@ -2,85 +2,86 @@ th,
 td {
   font-size: 1rem;
 }
-table,
-th,
-tr,
-td {
+.crud-table,
+.crud-table th,
+.crud-table tr,
+.crud-table td {
   border: 1px solid #ddd;
-
   padding: 0.5rem;
 }
 
-table {
+.crud-table {
   background-color: #fff;
   margin: 1rem 0;
   width: 100%;
   border-collapse: collapse;
 }
 
-table th:first-child,
-table tr td:first-child {
+.crud-table th:first-child,
+.crud-table tr td:first-child {
   width: 3rem;
 }
-table th:last-child,
-table tr td:last-child {
+.crud-table th:last-child,
+.crud-table tr td:last-child {
   width: 9rem;
 }
 
-tr:nth-child(even) {
+.crud-table tr:nth-child(even) {
   background-color: #e6e6e6;
 }
 
-tr:hover {
+.crud-table tr:hover:not(thead tr) {
   background-color: #d6d6d6;
 }
 
-td .icon-btn {
+.crud-table td .icon-btn {
   font-size: 0.9rem;
 }
-
-td.flex-center {
+.crud-table td.flex-center {
   border: none;
 }
-table {
+.crud-table {
   width: 100%;
 }
-@media (max-width: 900px) {
-  /* td.flex-con {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.2rem;
-  }
-  .flex-con .section-title {
-    text-align: left;
-  } */
-}
-@media (max-width: 768px) {
-  table,
-  thead,
-  tbody,
-  th,
-  td,
-  tr {
-    display: block;
-  }
 
-  thead tr {
+@media (max-width: 768px) {
+  .crud-table th:first-child,
+  .crud-table tr td:first-child {
+    width: 100%;
+  }
+  .crud-table,
+  .crud-table thead,
+  .crud-table tbody,
+  .crud-table th,
+  .crud-table td,
+  .crud-table tr {
+    display: flex;
+    flex-direction: column;
+    border: none;
+  }
+  .crud-table {
+    width: 100%;
+  }
+  .crud-table .flex-center {
+    flex-direction: row;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .crud-table thead tr {
     display: none;
   }
 
-  tr {
+  .crud-table tr {
     margin-bottom: 15px;
   }
 
-  td {
+  .crud-table td {
     text-align: right;
     padding-left: 50%;
     position: relative;
   }
 
-  /* td::before {
+  .crud-table td::before {
     content: attr(data-label);
     position: absolute;
     left: 0;
@@ -88,5 +89,5 @@ table {
     padding-left: 15px;
     font-weight: bold;
     text-align: left;
-  } */
+  }
 }

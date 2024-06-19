@@ -1,8 +1,12 @@
 import React from "react";
-import "./Input.css";
 
-const Input = () => {
-  return <input type="text" placeholder="Buscar..." />;
+const Input = ({ inputLabel, inputName, inputType, inputValue, inputChange }) => {
+  return (
+    <div className="form-group">
+      <label htmlFor={inputName}>{inputLabel}</label>
+      <input name={inputName} type={inputType} value={inputValue} onChange={inputChange} />
+    </div>
+  );
 };
 
 export default Input;
