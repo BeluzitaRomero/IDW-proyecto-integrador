@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import adminImg from "../../assets/img/banner-admin.jpg";
 import Banner from "../../components/Banner/Banner";
 import "./Administration.css";
+import TableComponent from "../../components/TableComponent/TableComponent";
 import AccommodationTab from "../../components/Tabs/AccommodationTab/AccommodationTab";
 import AccommodationTypeTab from "../../components/Tabs/AccommodationTypeTab/AccommodationTypeTab";
 import ServicesTab from "../../components/Tabs/ServicesTab/ServicesTab";
@@ -21,19 +22,14 @@ const Administration = () => {
         return (
           //Aca no deberia tener el boton de agregar y modificar
           <TableComponent
-            titles={[
-              "Id alojamiento servicio",
-              "Id Alojamiento",
-              "Servicio",
-              "Acciones",
-            ]}
+            titles={["Id alojamiento servicio", "Id Alojamiento", "Servicio", "Acciones"]}
             tableGet={`${tableUrl}alojamientosServicios/getAllAlojamientoServicios`}
             tableDelete={`${tableUrl}alojamientosServicios/deleteAlojamientoServicio/`}
             tableName="Alojamientos Servicios"
             tableParam="alojamientos-servicios"
           />
         );
-        case "servicios":
+      case "servicios":
         return <ServicesTab tableUrl={tableUrl} />;
       default:
         return null;
@@ -51,23 +47,14 @@ const Administration = () => {
           <button className="tab-btn underline" onClick={() => setActiveTab("alojamientosTipo")}>
             Tipos de Alojamiento
           </button>
-          <button
-            className="tab-btn underline"
-            onClick={() => setActiveTab("servicios")}
-          >
+          <button className="tab-btn underline" onClick={() => setActiveTab("servicios")}>
             Servicios
           </button>
 
-          <button
-            className="tab-btn underline"
-            onClick={() => setActiveTab("alojamientos-servicios")}
-          >
+          <button className="tab-btn underline" onClick={() => setActiveTab("alojamientos-servicios")}>
             Alojamientos-Servicios
           </button>
-          <button
-            className="tab-btn underline"
-            onClick={() => setActiveTab("servicios")}
-          >
+          <button className="tab-btn underline" onClick={() => setActiveTab("servicios")}>
             Imagenes
           </button>
         </div>
