@@ -6,7 +6,7 @@ const ItemList = ({ list }) => {
   return (
     <div className="home-section">
       {list.map((element) => (
-        <Item key={element.id} item={element} />
+        <Item key={element.idAlojamiento} item={element} />
       ))}
     </div>
   );

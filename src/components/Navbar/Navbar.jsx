@@ -17,8 +17,8 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link className="item-link underline" to="/administracion">
-            Administracion
+          <Link className="item-link underline" to="/administrar">
+            Administrar
           </Link>
         </li>
       </ul>

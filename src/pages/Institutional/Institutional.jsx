@@ -58,7 +58,7 @@ const Institutional = () => {
           </p>
         </div>
       </section>
-      <section className="content-section m-y m-x">
+      <section className="content-section m-y">
         <h2 className="section-title m-y center-text">
           "En nuestro compromiso con la excelencia, priorizamos la comodidad, la
           autenticidad y la satisfacción de nuestros huéspedes en cada

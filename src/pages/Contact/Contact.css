@@ -1,0 +1,110 @@
+.contact-form {
+  background-color: #fff;
+  width: 80%;
+  max-width: 500px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.contact-form .section-title {
+  margin-bottom: 1rem;
+}
+
+.contact-form legend {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.contact-form textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.form-input,
+textarea {
+  font-style: italic;
+  font-family: Montserrat, sans-serif;
+  border: none;
+}
+
+.contact-form label {
+  background-color: #fff;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
+  outline: none;
+}
+
+.contact-form fieldset {
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+}
+
+.contact-form legend {
+  margin-left: 10px;
+}
+
+/* Basic table styling */
+.contact-table {
+  width: 40%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.contact-table th,
+.contact-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+  .contact-table,
+  .contact-table thead,
+  .contact-table tbody,
+  .contact-table th,
+  .contact-table td,
+  .contact-table tr {
+    display: block;
+  }
+  .contact-table {
+    width: 80%;
+  }
+  .contact-table thead tr {
+    display: none;
+  }
+
+  .contact-table tr {
+    margin-bottom: 15px;
+  }
+
+  .contact-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  .contact-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-weight: bold;
+    text-align: left;
+  }
+}

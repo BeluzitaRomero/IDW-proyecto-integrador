@@ -51,21 +51,9 @@
 .services {
   gap: 1.5rem;
 }
-.icon-btn {
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 2px solid #131313;
-  background-color: transparent;
-  border-radius: 50%;
-}
-
-.flex-col {
-  display: flex;
-  flex-direction: column;
-}
 
 .slick-arrow::before {
-  color: #000 !important;
+  color: #1e1e1e !important;
 }
 
 .rotate {
@@ -75,4 +63,16 @@
 .unrotate {
   transform: rotate(0deg);
   transition: transform 0.3s;
+}
+
+@media (max-width: 720px) {
+  .title-section {
+    width: 100%;
+  }
+  .detail-container {
+    flex-direction: column-reverse;
+  }
+  .detail-container > * {
+    width: 100%;
+  }
 }

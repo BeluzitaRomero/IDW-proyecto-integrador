@@ -1,36 +1,39 @@
-export const getAccommodations = (dataList) =>
-  new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (dataList.length) {
-        resolve(dataList);
-      } else {
-        reject("Error");
-      }
-    }, 2000);
-  });
+import axios from "axios";
+import { geocode } from "react-geocode";
 
-/* El setTimeout lo pongo aca solamente como para
-    simular un tiempo de respuesta de cuando se pide la data
-    y que tenga un pequelo rendering condicional con un ternario en el
-    componente "container" para que mientras se procesa la peticion
-    el usuario vea un spinner o un mensaje de carga. */
+export const getData = async (url) => {
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
+export const deleteData = async (url) => {
+  try {
+    await axios.delete(url);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
 
 // Función para obtener la ciudad basada en las coordenadas geográficas
 //En el tp la estructura que nos tiran a usar tiene latitud y longitud, por eso
 //busque info de como usar una api que convierta esos valores a la ciudad
 export function obtenerCiudad(latitud, longitud) {
-  const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitud}&lon=${longitud}&zoom=18&addressdetails=1`;
-
-  return fetch(apiUrl)
+  return geocode("latlng", `${latitud},${longitud}`, {
+    key: "AIzaSyDZmqbRMOVEJcGQj7g9Ssin-wWcYPMGoxM",
+  })
     .then((response) => {
-      if (!response.ok) {
+      if (!response) {
         throw new Error("Error al obtener la respuesta de la API");
       }
-      return response.json();
+      return response;
     })
     .then((data) => {
-      const city =
-        data.address.city || data.address.suburb || data.address.town;
+      const city = data.results[0].address_components[3].long_name;
       return city;
     })
     .catch((error) => {
