@@ -3,7 +3,7 @@ import bedIcon from "../../assets/img/bed-icon.webp";
 import { Link } from "react-router-dom";
 import { getData } from "../../utils/api";
 import "./Item.css";
-
+import AddDefaultImg from "../DefaultImage/DefaultImage";
 import { obtenerCiudad } from "../../utils/api";
 
 const Item = ({ item }) => {
