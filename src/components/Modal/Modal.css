@@ -21,4 +21,11 @@
   align-items: center;
   flex-direction: column;
   width: 40%;
+  text-align: center;
+}
+
+@media (max-width: 756px) {
+  .modal-content {
+    width: 90%;
+  }
 }

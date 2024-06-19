@@ -49,7 +49,7 @@ const ItemListContainer = () => {
 
   return (
     <>
-      <div className="filtroHome">
+      <div className="filtroHome" id="explorar">
         <select name="tipoAlojamiento" id="" onChange={handleFilter} className="">
           <option value="">Tipo</option>
           {accommodationsType &&
@@ -88,7 +88,7 @@ const ItemListContainer = () => {
         </div>
       </div>
 
-      <section id="explorar" className="content-section m-y">
+      <section className="content-section m-y">
         <h2 className="section-title">Estas en IDW. Estas en casa</h2>
         <hr />
         <p>

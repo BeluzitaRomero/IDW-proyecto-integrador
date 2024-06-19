@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "../../Modal/Modal";
-import { getData, deleteData } from "../../../utils/api";
+import axios from "axios";
+import AccommodationsTableFilter from "../../Filters/AccommodationsTableFilter/AccommodationsTableFilter";
 
-const AccommodationTable = ({ accommodations, accommodationsType }) => {
+const AccommodationTable = ({ accommodations, accommodationsType, deleteAccomodation }) => {
   const [filter, setFilter] = useState([]);
 
   const [modal, setModal] = useState(false);
@@ -17,9 +18,18 @@ const AccommodationTable = ({ accommodations, accommodationsType }) => {
   };
 
   const handleDeleteConfirm = async (id) => {
-    await deleteData(`http://localhost:3001/alojamiento/deleteAlojamiento/${id}`);
-    const updateData = await getData("http://localhost:3001/alojamiento/getAlojamientos");
-    setFilter(updateData);
+    const url = "http://localhost:3001/";
+    const response = await axios.get(`${url}alojamientosServicios/getAlojamientoServicio/${id}`);
+
+    if (response.data.length > 0) {
+      const deleteRequests = response.data.map((service) =>
+        axios.delete(`http://localhost:3001/alojamientosServicios/deleteAlojamientoServicio/${service.idAlojamientoServicio}`)
+      );
+      await Promise.all(deleteRequests);
+    }
+
+    deleteAccomodation(id);
+    setFilter([]);
     setModal(false);
   };
 
@@ -30,12 +40,13 @@ const AccommodationTable = ({ accommodations, accommodationsType }) => {
 
   const filteredData = accommodations.filter((accommodation) => {
     return (
-      (!filter.Titulo || accommodation.Titulo.includes(filter.Titulo)) &&
-      (!filter.Descripcion || accommodation.Descripcion.includes(filter.Descripcion)) &&
+      (!filter.Titulo || accommodation.Titulo.toLowerCase().includes(filter.Titulo.toLowerCase())) &&
+      (!filter.Descripcion || accommodation.Descripcion.toLowerCase().includes(filter.Descripcion)) &&
       (!filter.tipoAlojamiento || String(accommodation.idTipoAlojamiento) === filter.tipoAlojamiento) &&
       (!filter.Estado || accommodation.Estado === filter.Estado)
     );
   });
+
   return (
     <>
       <div className="flex-space">
@@ -44,24 +55,9 @@ const AccommodationTable = ({ accommodations, accommodationsType }) => {
           Agregar +
         </Link>
       </div>
-      <div className="flex-space crud-inputs">
-        <input type="text" placeholder="Titulo" name="Titulo" onChange={handleFilter} className="crud-input" />
-        <input type="text" placeholder="Descripcion" name="Descripcion" onChange={handleFilter} className="crud-input" />
-        <select name="tipoAlojamiento" id="" onChange={handleFilter} className="crud-input">
-          <option value="">Tipo</option>
-          {accommodationsType &&
-            accommodationsType.map((type) => (
-              <option key={type.idTipoAlojamiento} value={type.idTipoAlojamiento}>
-                {type.Descripcion}
-              </option>
-            ))}
-        </select>
-        <select name="Estado" id="" onChange={handleFilter} className="crud-input">
-          <option value="">Estado</option>
-          <option value="Disponible">Disponible</option>
-          <option value="Reservado">Reservado</option>
-        </select>
-      </div>
+
+      <AccommodationsTableFilter accommodationsType={accommodationsType} handleFilter={handleFilter} />
+
       <table className="crud-table">
         <thead>
           <tr>
@@ -79,7 +75,7 @@ const AccommodationTable = ({ accommodations, accommodationsType }) => {
           </tr>
         </thead>
         <tbody>
-          {filteredData ? (
+          {filteredData.length > 0 ? (
             filteredData.map((accommodation) => (
               <tr key={accommodation.idAlojamiento}>
                 <td data-label="Id">{accommodation.idAlojamiento}</td>
@@ -106,17 +102,19 @@ const AccommodationTable = ({ accommodations, accommodationsType }) => {
               </tr>
             ))
           ) : (
-            <tr className="">
-              <td>No se encontro</td>
+            <tr>
+              <td colSpan={11} className="center-text">
+                No se encontró
+              </td>
             </tr>
-          )}
-          {modal && (
-            <Modal accept={() => handleDeleteConfirm(modalId)} cancel={() => setModal(false)}>
-              <p>{modalMessage}</p>
-            </Modal>
           )}
         </tbody>
       </table>
+      {modal && (
+        <Modal accept={() => handleDeleteConfirm(modalId)} cancel={() => setModal(false)}>
+          <p>{modalMessage}</p>
+        </Modal>
+      )}
     </>
   );
 };

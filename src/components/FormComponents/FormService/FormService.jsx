@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../FormComponent.css";
 import axios from "axios";
 import Modal from "../../Modal/Modal";
 import { getData } from "../../../utils/api";
+import Input from "../../Input/Input";
 
 const FormService = ({ id }) => {
   const initialForm = {
     Nombre: "",
   };
 
+  const navigate = useNavigate();
   const [form, setForm] = useState(initialForm);
+
+  const [modalError, setModalError] = useState(false);
   const [modal, setModal] = useState(false);
   const [modalMessage, setModalMessage] = useState();
+
   const apiUrl = "http://localhost:3001/servicio/";
 
   const compareData = (resData, formData) => {
@@ -34,13 +39,14 @@ const FormService = ({ id }) => {
     e.preventDefault();
     if (!validateForm()) {
       setModalMessage("Por favor completa todos los campos");
-      setModal(true);
+      setModalError(true);
       return;
     }
     try {
       const responseData = await getData(`${apiUrl}getAllServicios/`);
       if (compareData(responseData, form)) {
         setModalMessage(`Servicio ya existente`);
+        setModalError(true);
       } else {
         if (id) {
           await axios.put(`${apiUrl}updateServicio/${id}`, form);
@@ -48,12 +54,13 @@ const FormService = ({ id }) => {
           await axios.post(`${apiUrl}createServicio`, form);
         }
         setModalMessage(`Servicio ${id ? "actualizado" : "creado"} con éxito`);
+        setModal(true);
       }
     } catch (error) {
       console.error("Error:", error);
       setModalMessage(`Ocurrió un error al ${id ? "actualizar" : "crear"} el servicio`);
+      setModalError(true);
     }
-    setModal(true);
   };
 
   useEffect(() => {
@@ -62,16 +69,15 @@ const FormService = ({ id }) => {
         .then((res) => setForm(res))
         .catch((err) => console.error(`Error: ${err}`));
     }
-  }, []);
+  }, [id]);
 
   return (
     <main className="m-y crud-form">
       <h2 className="section-title">{id ? "Actualizar" : "Agregar"} Servicio</h2>
+
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="Nombre">Nombre</label>
-          <input name="Nombre" type="text" defaultValue={form.Nombre} onChange={handleChange} />
-        </div>
+        <Input inputLabel="Nombre" inputName="Nombre" inputType="text" inputValue={form.Nombre} inputChange={handleChange} />
+
         <Link to="/administrar" className="btn cancel-button">
           Volver
         </Link>
@@ -79,12 +85,15 @@ const FormService = ({ id }) => {
           {id ? "Actualizar" : "Agregar"}
         </button>
       </form>
+
       {modal && (
-        <Modal>
-          {modalMessage}
-          <Link to="/administrar" className="btn secondary-button">
-            Volver
-          </Link>
+        <Modal accept={() => navigate("/administrar")}>
+          <p>{modalMessage}</p>
+        </Modal>
+      )}
+      {modalError && (
+        <Modal accept={() => setModalError(false)} cancel={() => navigate("/administrar")}>
+          <p>{modalMessage}</p>
         </Modal>
       )}
     </main>
