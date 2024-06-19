@@ -16,6 +16,7 @@ export const deleteData = async (url) => {
     await axios.delete(url);
   } catch (error) {
     console.error("Error:", error);
+    throw error;
   }
 };
 

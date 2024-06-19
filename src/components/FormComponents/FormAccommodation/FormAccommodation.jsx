@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Modal from "../../Modal/Modal";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getData } from "../../../utils/api";
 import axios from "axios";
+import Input from "../../Input/Input";
 
 const FormAccommodation = ({ id }) => {
+  const navigate = useNavigate();
+
   const [modal, setModal] = useState(false);
+  const [modalError, setModalError] = useState(false);
   const [modalMessage, setModalMessage] = useState();
 
   //estados para tipos y alojamientos
@@ -26,7 +30,6 @@ const FormAccommodation = ({ id }) => {
     CantidadBanios: "",
     Estado: "Disponible",
     idTipoAlojamiento: "",
-
   });
 
   const fetchUrl = "http://localhost:3001";
@@ -95,7 +98,7 @@ const FormAccommodation = ({ id }) => {
       .then((response) => {
         setSelectedServices(response.map((service) => service.idServicio));
       })
-      .catch((error) => console.error("Error fetching services:", error));
+      .catch((error) => console.error(`Error: ${error}`));
   }, [id]);
 
   const handleSubmit = async (e) => {
@@ -106,36 +109,23 @@ const FormAccommodation = ({ id }) => {
       // y busca servicios asociados para borrar los que ya no tiene y agregar nuevos
       try {
         // Actualizar alojamiento
-        await axios.put(
-          `${fetchUrl}/alojamiento/putAlojamiento/${id}`,
-          dataForm
-        );
+        await axios.put(`${fetchUrl}/alojamiento/putAlojamiento/${id}`, dataForm);
 
         // Obtener servicios asociados inicialmente
-        const initialSelectedServices = await axios
-          .get(`${fetchUrl}/alojamientosServicios/getAlojamientoServicio/${id}`)
-          .then((res) => res.data);
+        const initialSelectedServices = await axios.get(`${fetchUrl}/alojamientosServicios/getAlojamientoServicio/${id}`).then((res) => res.data);
 
         // Guardar los idAlojamientoServicios
-        const initialServiceIds = initialSelectedServices.map(
-          (service) => service.idAlojamientoServicio
-        );
+        const initialServiceIds = initialSelectedServices.map((service) => service.idAlojamientoServicio);
 
         // Encontrar los servicios que se han desmarcado (eliminar)
-        const servicesToDelete = initialSelectedServices.filter(
-          (service) => !selectedServices.includes(service.idServicio)
-        );
+        const servicesToDelete = initialSelectedServices.filter((service) => !selectedServices.includes(service.idServicio));
 
         // Encontrar los nuevos servicios que se han marcado (agregar)
-        const servicesToAdd = selectedServices.filter(
-          (serviceId) => !initialServiceIds.includes(serviceId)
-        );
+        const servicesToAdd = selectedServices.filter((serviceId) => !initialServiceIds.includes(serviceId));
 
         // Eliminar las asociaciones de servicios desmarcados (por idAlojamientoServicio)
         const deleteRequests = servicesToDelete.map((service) =>
-          axios.delete(
-            `${fetchUrl}/alojamientosServicios/deleteAlojamientoServicio/${service.idAlojamientoServicio}`
-          )
+          axios.delete(`${fetchUrl}/alojamientosServicios/deleteAlojamientoServicio/${service.idAlojamientoServicio}`)
         );
 
         // Crear nuevas asociaciones de servicios marcados (post)
@@ -144,10 +134,7 @@ const FormAccommodation = ({ id }) => {
             idAlojamiento: parseInt(id),
             idServicio: parseInt(idServicio),
           };
-          return axios.post(
-            `${fetchUrl}/alojamientosServicios/createAlojamientoServicio`,
-            servicioSeleccionado
-          );
+          return axios.post(`${fetchUrl}/alojamientosServicios/createAlojamientoServicio`, servicioSeleccionado);
         });
 
         // Esperar a que todas las solicitudes se completen porque el backend
@@ -158,9 +145,7 @@ const FormAccommodation = ({ id }) => {
         setModal(true);
         clearForm();
       } catch (error) {
-        setModalMessage(
-          `Ocurrió un error al actualizar el alojamiento y servicios`
-        );
+        setModalMessage(`Ocurrió un error al actualizar el alojamiento y servicios`);
         setModal(true);
         console.error("Hubo un error al realizar la solicitud PUT:", error);
       }
@@ -169,32 +154,26 @@ const FormAccommodation = ({ id }) => {
 
       // Validar formulario antes de enviar solo si no hay un ID
       if (!validateForm()) {
-        setModal(true);
+        setModalError(true);
         setModalMessage("Por favor complete todos los campos correctamente.");
         return;
       }
 
       try {
-        const res = await axios.post(
-          `${fetchUrl}/alojamiento/createAlojamiento`,
-          dataForm
-        );
+        const res = await axios.post(`${fetchUrl}/alojamiento/createAlojamiento`, dataForm);
 
         // El ID del alojamiento se devuelve en la respuesta
         const alojamientoId = res.data.id;
 
         // Crear servicios asociados (iterando, para crear la estructura de cada uno
-        // y su post individual, ya que el backend no tiene manejo de promesas multiples)
+        // y su post individual)
         const requests = selectedServices.map((idServicio) => {
           const servicioSeleccionado = {
             idAlojamiento: parseInt(alojamientoId),
             idServicio: parseInt(idServicio),
           };
 
-          return axios.post(
-            `${fetchUrl}/alojamientosServicios/createAlojamientoServicio`,
-            servicioSeleccionado
-          );
+          return axios.post(`${fetchUrl}/alojamientosServicios/createAlojamientoServicio`, servicioSeleccionado);
         });
 
         await Promise.all(requests);
@@ -202,130 +181,82 @@ const FormAccommodation = ({ id }) => {
         setModalMessage(`Alojamiento y servicios creados con éxito`);
         setModal(true);
         clearForm();
-      } catch (error) {
+      } catch (err) {
         setModalMessage(`Ocurrió un error al crear el alojamiento y servicios`);
         setModal(true);
-        console.error("Hubo un error:", error);
+        console.error(`Error: ${err}`);
       }
     }
   };
 
   return (
     <main className="m-y crud-form">
-      <h2 className="section-title">
-        {id ? "Actualizar" : "Agregar"} Alojamiento
-      </h2>
+      <h2 className="section-title">{id ? "Actualizar" : "Agregar"} Alojamiento</h2>
       <form onSubmit={handleSubmit} className="service-checkboxes">
+        <Input inputLabel="Titulo" inputName="Titulo" inputType="text" inputValue={dataForm.Titulo} inputChange={handleChange} />
+        <Input inputLabel="Descripcion" inputName="Descripcion" inputType="text" inputValue={dataForm.Descripcion} inputChange={handleChange} />
         <div className="form-group">
-          <label htmlFor="Titulo">Titulo</label>
-          <input
-            name="Titulo"
-            type="text"
-            value={dataForm.Titulo}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="Descripcion">Descripción</label>
-          <input
-            name="Descripcion"
-            type="text"
-            value={dataForm.Descripcion}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="idTipoAlojamiento">Tipo de alojamiento:</label>
-          <select
-            name="idTipoAlojamiento"
-            value={dataForm.idTipoAlojamiento || ""}
-            onChange={handleChange}
-          >
+          <label htmlFor="idTipoAlojamiento">Tipo de alojamiento</label>
+          <select name="idTipoAlojamiento" value={dataForm.idTipoAlojamiento || ""} onChange={handleChange}>
             <option value="" disabled>
               Seleccione un tipo
             </option>
             {types.map((type) => (
-              <option
-                key={type.idTipoAlojamiento}
-                value={type.idTipoAlojamiento}
-              >
+              <option key={type.idTipoAlojamiento} value={type.idTipoAlojamiento}>
                 {type.Descripcion}
               </option>
             ))}
           </select>
         </div>
+        <Input inputLabel="Latitud" inputName="Latitud" inputType="number" inputValue={dataForm.Latitud} inputChange={handleChange} />
+        <Input inputLabel="Longitud" inputName="Longitud" inputType="number" inputValue={dataForm.Longitud} inputChange={handleChange} />
+        <Input
+          inputLabel="Precio por día"
+          inputName="PrecioPorDia"
+          inputType="number"
+          inputValue={dataForm.PrecioPorDia}
+          inputChange={handleChange}
+        />
+        <Input
+          inputLabel="Cantidad de dormitorios"
+          inputName="CantidadDormitorios"
+          inputType="number"
+          inputValue={dataForm.CantidadDormitorios}
+          inputChange={handleChange}
+        />
+        <Input
+          inputLabel="Cantidad de baños"
+          inputName="CantidadBanios"
+          inputType="number"
+          inputValue={dataForm.CantidadBanios}
+          inputChange={handleChange}
+        />
         <div className="form-group">
-          <label htmlFor="Latitud">Latitud</label>
-          <input
-            name="Latitud"
-            type="number"
-            value={dataForm.Latitud}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="Longitud">Longitud</label>
-          <input
-            name="Longitud"
-            type="number"
-            value={dataForm.Longitud}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="PrecioPorDia">Precio por día</label>
-          <input
-            name="PrecioPorDia"
-            type="number"
-            value={dataForm.PrecioPorDia}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="CantidadDormitorios">Cantidad de dormitorios</label>
-          <input
-            name="CantidadDormitorios"
-            type="number"
-            value={dataForm.CantidadDormitorios}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="CantidadBanios">Cantidad de baños</label>
-          <input
-            name="CantidadBanios"
-            type="number"
-            value={dataForm.CantidadBanios}
-            onChange={handleChange}
-            min={"0"}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="Estado">Estado:</label>
+          <label htmlFor="Estado">Estado</label>
           <select name="Estado" value={dataForm.Estado} onChange={handleChange} required>
             <option value="Disponible">Disponible</option>
             <option value="Reservado">Reservado</option>
           </select>
         </div>
-        <h2 className="title-secondary">
-          Selecciona los servicios para este alojamiento:
-        </h2>
-        <div className="checkbox-container">
-          {services.length &&
-            services.map((service) => (
-              <div key={service.idServicio} className="checkbox-group">
-                <label htmlFor={`servicio-${service.idServicio}`}>
-                  {service.Nombre}
-                </label>
-                <input
-                  type="checkbox"
-                  id={`servicio-${service.idServicio}`}
-                  value={service.idServicio}
-                  checked={selectedServices.includes(service.idServicio)}
-                  onChange={handleCheckboxChange}
-                />
-              </div>
-            ))}
+        <div className="form-group">
+          <h2 className="title-secondary">Servicios</h2>
+          <div className="checkbox-container">
+            {services.length &&
+              services.map((service) => (
+                <div key={service.idServicio} className="checkbox-group">
+                  <input
+                    type="checkbox"
+                    id={`servicio-${service.idServicio}`}
+                    value={service.idServicio}
+                    checked={selectedServices.includes(service.idServicio)}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label htmlFor={`servicio-${service.idServicio}`} className="service-label">
+                    {service.Nombre}
+                  </label>
+                </div>
+              ))}
+          </div>
         </div>
 
         <Link to="/administrar" className="btn cancel-button">
@@ -336,11 +267,13 @@ const FormAccommodation = ({ id }) => {
         </button>
       </form>
       {modal && (
-        <Modal>
-          {modalMessage}
-          <Link to="/administrar" className="btn secondary-button">
-            Volver
-          </Link>
+        <Modal accept={() => navigate("/administrar")}>
+          <p>{modalMessage}</p>
+        </Modal>
+      )}
+      {modalError && (
+        <Modal accept={() => setModalError(false)} cancel={() => navigate("/administrar")}>
+          <p>{modalMessage}</p>
         </Modal>
       )}
     </main>

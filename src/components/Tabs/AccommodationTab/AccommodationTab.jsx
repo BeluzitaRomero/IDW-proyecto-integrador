@@ -1,28 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { getData } from "../../../utils/api";
+import { getData, deleteData } from "../../../utils/api";
 import AccommodationTable from "../../TableComponent/AccommodationTable/AccommodationTable";
 
 const AccommodationTab = ({ tableUrl }) => {
   const [accommodations, setAccommodations] = useState([]);
   const [accommodationsType, setAccommodationsType] = useState();
-  const [accommodationsFull, setAccommodationsFull] = useState([]);
 
   useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const responseAlojamientos = await getData(`${tableUrl}alojamiento/getAlojamientos`);
-    //     responseAlojamientos.map(async (accommodation) => {
-    //       const responseTipo = await getData(`${tableUrl}tiposAlojamiento/getTipoAlojamiento/${accommodation.idTipoAlojamiento}`);
-    //       const full = { ...accommodation, tipoAlojamiento: responseTipo.Descripcion };
-    //       setAccommodationsFull(full);
-    //       return { ...accommodation, tipoAlojamiento: responseTipo.Descripcion };
-    //     });
-    //   } catch (error) {
-    //     console.error(`Error: ${error}`);
-    //   }
-    // };
-    // fetchData();
-
     getData(`${tableUrl}alojamiento/getAlojamientos`)
       .then((res) => setAccommodations(res))
       .catch((err) => console.error(`Error: ${err}`));
@@ -32,9 +16,14 @@ const AccommodationTab = ({ tableUrl }) => {
       .catch((err) => console.error(`Error: ${err}`));
   }, [tableUrl]);
 
+  const deleteAccomodation = async (id) => {
+    await deleteData(`http://localhost:3001/alojamiento/deleteAlojamiento/${id}`);
+    const updateData = await getData("http://localhost:3001/alojamiento/getAlojamientos");
+    setAccommodations(updateData);
+  };
   return (
     <>
-      <AccommodationTable accommodations={accommodations} accommodationsType={accommodationsType} />
+      <AccommodationTable accommodations={accommodations} accommodationsType={accommodationsType} deleteAccomodation={deleteAccomodation} />
     </>
   );
 };
