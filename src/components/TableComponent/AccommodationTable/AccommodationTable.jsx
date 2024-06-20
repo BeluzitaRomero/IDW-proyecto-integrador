@@ -57,59 +57,60 @@ const AccommodationTable = ({ accommodations, accommodationsType, deleteAccomoda
       </div>
 
       <AccommodationsTableFilter accommodationsType={accommodationsType} handleFilter={handleFilter} />
-
-      <table className="crud-table">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Titulo</th>
-            <th>Descripcion</th>
-            <th>Tipo</th>
-            <th>Latitud</th>
-            <th>Longitud</th>
-            <th>PrecioPorDia</th>
-            <th>Dormitorios</th>
-            <th>Baños</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData.length > 0 ? (
-            filteredData.map((accommodation) => (
-              <tr key={accommodation.idAlojamiento}>
-                <td data-label="Id">{accommodation.idAlojamiento}</td>
-                <td data-label="Titulo">{accommodation.Titulo}</td>
-                <td data-label="Descripcion">{accommodation.Descripcion}</td>
-                <td data-label="Tipo">
-                  {accommodationsType && accommodationsType.find((a) => a.idTipoAlojamiento === accommodation.idTipoAlojamiento).Descripcion}
-                </td>
-                <td data-label="Latitud">{accommodation.Latitud}</td>
-                <td data-label="Longitud">{accommodation.Longitud}</td>
-                <td data-label="PrecioPorDia">$ {accommodation.PrecioPorDia}</td>
-                <td data-label="Dormitorios">{accommodation.CantidadDormitorios}</td>
-                <td data-label="Baños">{accommodation.CantidadBanios}</td>
-                <td data-label="Estado">{accommodation.Estado}</td>
-                <td className="flex-center">
-                  <Link to={`/alojamiento/${accommodation.idAlojamiento}`} className="icon-btn fa-solid fa-arrow-up-right-from-square"></Link>
-                  <Link to={`/editar/alojamientos/${accommodation.idAlojamiento}`} className="icon-btn fa-solid fa-solid fa-pen-to-square"></Link>
-                  <button
-                    className="icon-btn fa-solid fa-trash"
-                    onClick={() => {
-                      handleDelete(accommodation.idAlojamiento, `¿Desea eliminar ${accommodation.Titulo}?`);
-                    }}></button>
+      <div className="accommodation-table">
+        <table className="crud-table accommodation-table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Titulo</th>
+              <th>Descripcion</th>
+              <th>Tipo</th>
+              <th>Latitud</th>
+              <th>Longitud</th>
+              <th>PrecioPorDia</th>
+              <th>Dormitorios</th>
+              <th>Baños</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredData.length > 0 ? (
+              filteredData.map((accommodation) => (
+                <tr key={accommodation.idAlojamiento}>
+                  <td data-label="Id">{accommodation.idAlojamiento}</td>
+                  <td data-label="Titulo">{accommodation.Titulo}</td>
+                  <td data-label="Descripcion">{accommodation.Descripcion}</td>
+                  <td data-label="Tipo">
+                    {accommodationsType && accommodationsType.find((a) => a.idTipoAlojamiento === accommodation.idTipoAlojamiento).Descripcion}
+                  </td>
+                  <td data-label="Latitud">{accommodation.Latitud}</td>
+                  <td data-label="Longitud">{accommodation.Longitud}</td>
+                  <td data-label="PrecioPorDia">$ {accommodation.PrecioPorDia}</td>
+                  <td data-label="Dormitorios">{accommodation.CantidadDormitorios}</td>
+                  <td data-label="Baños">{accommodation.CantidadBanios}</td>
+                  <td data-label="Estado">{accommodation.Estado}</td>
+                  <td className="flex-center">
+                    <Link to={`/alojamiento/${accommodation.idAlojamiento}`} className="icon-btn fa-solid fa-arrow-up-right-from-square"></Link>
+                    <Link to={`/editar/alojamientos/${accommodation.idAlojamiento}`} className="icon-btn fa-solid fa-solid fa-pen-to-square"></Link>
+                    <button
+                      className="icon-btn fa-solid fa-trash"
+                      onClick={() => {
+                        handleDelete(accommodation.idAlojamiento, `¿Desea eliminar ${accommodation.Titulo}?`);
+                      }}></button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={11} className="center-text">
+                  No se encontró
                 </td>
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan={11} className="center-text">
-                No se encontró
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+            )}
+          </tbody>
+        </table>
+      </div>
       {modal && (
         <Modal accept={() => handleDeleteConfirm(modalId)} cancel={() => setModal(false)}>
           <p>{modalMessage}</p>

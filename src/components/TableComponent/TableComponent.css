@@ -44,6 +44,10 @@ td {
   width: 100%;
 }
 
+.accommodation-table {
+  overflow-x: auto;
+}
+
 @media (max-width: 768px) {
   .crud-table th:first-child,
   .crud-table tr td:first-child {
