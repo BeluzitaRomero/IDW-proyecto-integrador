@@ -8,13 +8,17 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { carouselSettings } from "../../utils/carouselSettings";
-import { Map, Marker, APIProvider } from "@vis.gl/react-google-maps";
+import { Map, AdvancedMarker, APIProvider} from "@vis.gl/react-google-maps";
 import { getData } from "../../utils/api";
+import AddDefaultImg from "../../components/DefaultImage/DefaultImage";
+import bannerImage from "../../assets/img/casa3.webp";
 
 const AccommodationDetail = ({ item }) => {
   const [ciudad, setCiudad] = useState(null);
   const [toggle, setToggle] = useState(false);
   const [accommodationType, setAccommodationType] = useState({});
+  const [accommodationService, setAccommodationService] = useState({});
+  const [service, setService] = useState({});
 
   const [markerLocation, setMarkerLocation] = useState({
     lat: parseFloat(item.Latitud),
@@ -23,11 +27,27 @@ const AccommodationDetail = ({ item }) => {
 
   const fetchUrl = `http://localhost:3001/tiposAlojamiento/getTipoAlojamiento/${item.idTipoAlojamiento}`;
 
+  const fetchUrlAlojamientoServicios = `http://localhost:3001/alojamientosServicios/getAlojamientoServicio/${item.idAlojamiento}`;
+
+  const fetchUrlServicios = `http://localhost:3001/servicio/getAllServicios/`;
+
   useEffect(() => {
     getData(fetchUrl)
       .then((res) => setAccommodationType(res))
       .catch((err) => console.error(`${err}: no encontrado`));
-  }, [fetchUrl]);
+
+      getData(fetchUrlAlojamientoServicios)
+      .then((res) => setAccommodationService(res))
+      .catch((err) => console.error(`${err}: no encontrado`));
+
+      getData(fetchUrlServicios)
+      .then((res) => setService(res))
+      .catch((err) => console.error(`${err}: no encontrado`));
+
+  }, [fetchUrl,fetchUrlAlojamientoServicios, fetchUrlServicios]);
+  
+  const firstArrayEntries = Object.values(accommodationService);
+  const secondArrayEntries = Object.values(service);  
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -38,11 +58,8 @@ const AccommodationDetail = ({ item }) => {
 
   return (
     <>
-      {/* <Banner
-        imagen={
-          item.imagenes.find((element) => element.cover === true).rutaArchivo
-        }
-      /> */}
+      <Banner
+        imagen={bannerImage ? bannerImage : { AddDefaultImg}} alt={item.Titulo} onError={AddDefaultImg} />
       <main className="m-y">
         <section className="title-container flex-col">
           <div className="title-section flex-col">
@@ -80,25 +97,45 @@ const AccommodationDetail = ({ item }) => {
                   </p>
                 </div>
                 <div className="services flex-col">
-                  <h4 className="alter-title">Servicios:</h4>
-                  {/* {item.Servicios.map((servicio) => (
-                    <p>{servicio.Nombre}</p>
-                  ))} */}
+                  <h4 className="alter-title">Servicios:</h4>                 
+                  {firstArrayEntries.map((item, index) => {
+                    const matchedService = secondArrayEntries.find(serv => serv.idServicio === item.idServicio);
+                    const serviceName = matchedService ? matchedService.Nombre : "Servicio no encontrado";
+                    return (
+                      <p key={index}>
+                        <span>{serviceName}</span>
+                      </p>
+                    );
+                  })}
                 </div>
                 <div className="services flex-col">
                   <h4 className="alter-title">Ubicación:</h4>
                 </div>
                 <div className="map-container">
                   <APIProvider apiKey={"AIzaSyDZmqbRMOVEJcGQj7g9Ssin-wWcYPMGoxM"}>
-                    <Map defaultZoom={13} defaultCenter={markerLocation} gestureHandling={"greedy"} disableDefaultUI>
-                      <Marker position={markerLocation} />
+                    <Map defaultZoom={13} defaultCenter={markerLocation} gestureHandling={"greedy"} disableDefaultUI mapId="MAP_ID">
+                      <AdvancedMarker position={markerLocation} />
                     </Map>
                   </APIProvider>
                 </div>
               </>
             )}
           </div>
-          {/* <Slider {...carouselSettings} className="slider-container">
+          <Slider {...carouselSettings} className="slider-container">  
+              <div>
+                <img src="/img/interior1.webp" alt="interior 1" />
+              </div>
+              <div>
+                <img src="/img/interior2.webp" alt="interior 2" />
+              </div>
+              <div>
+                <img src="/img/interior3.webp" alt="interior 3" />
+              </div>
+          </Slider>
+          {/* 
+          Al conectar con imágenes tendríamos que mapear lo que traigamos de la tabla que coincida con el ID "alojamiento".
+          
+          <Slider {...carouselSettings} className="slider-container">
             {item.imagenes.map((imagen) => (
               <div>
                 <img src={imagen.rutaArchivo} alt="" />
