@@ -35,11 +35,11 @@ const Administration = () => {
           <button className="tab-btn underline" onClick={() => setActiveTab("alojamientos")}>
             Alojamientos
           </button>
-          <button className="tab-btn underline" onClick={() => setActiveTab("alojamientosTipo")}>
-            Tipos de Alojamiento
-          </button>
           <button className="tab-btn underline" onClick={() => setActiveTab("servicios")}>
             Servicios
+          </button>
+          <button className="tab-btn underline" onClick={() => setActiveTab("alojamientosTipo")}>
+            Tipos de Alojamiento
           </button>
           <button className="tab-btn underline" onClick={() => setActiveTab("alojamientos-servicios")}>
             Alojamientos-Servicios
