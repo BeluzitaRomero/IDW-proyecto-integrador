@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const [toggle, setToggle] = useState(false);
+
   return (
     <nav>
-      <ul>
+      <button className={toggle ? "hola" : "chau"} onClick={() => setToggle(!toggle)}>
+        a
+      </button>
+      <ul className={toggle ? "hola" : "chau"}>
         <li>
           <Link className="item-link underline" to="/institucional">
             Institucional

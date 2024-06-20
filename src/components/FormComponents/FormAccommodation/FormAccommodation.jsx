@@ -115,13 +115,13 @@ const FormAccommodation = ({ id }) => {
         const initialSelectedServices = await axios.get(`${fetchUrl}/alojamientosServicios/getAlojamientoServicio/${id}`).then((res) => res.data);
 
         // Guardar los idAlojamientoServicios
-        const initialServiceIds = initialSelectedServices.map((service) => service.idAlojamientoServicio);
+        // const initialServiceIds = initialSelectedServices.map((service) => service.idAlojamientoServicio);
 
         // Encontrar los servicios que se han desmarcado (eliminar)
-        const servicesToDelete = initialSelectedServices.filter((service) => !selectedServices.includes(service.idServicio));
+        const servicesToDelete = initialSelectedServices;
 
         // Encontrar los nuevos servicios que se han marcado (agregar)
-        const servicesToAdd = selectedServices.filter((serviceId) => !initialServiceIds.includes(serviceId));
+        const servicesToAdd = selectedServices;
 
         // Eliminar las asociaciones de servicios desmarcados (por idAlojamientoServicio)
         const deleteRequests = servicesToDelete.map((service) =>
