@@ -1,0 +1,136 @@
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%; /* Asegura que el contenedor no sea más ancho que el viewport */
+  padding: 0 20px; /* Añade un poco de espacio alrededor del contenedor */
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px; /* Espacio entre contenedores */
+  min-width: 250px; /* Ancho máximo para cada elemento */
+  margin: 0 auto; /* Centrar horizontalmente */
+}
+
+.input-container select,
+.input-container button {
+  margin-top: 10px; /* Espacio entre elementos dentro de input-container */
+}
+
+.crud-input {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px;
+  font-family: Montserrat;
+  font-size: 1rem;
+  max-width: auto; /* Ancho máximo */
+  background-color: white;
+}
+
+.titulo {
+  /* Puse los margenes por separado pq sino m-y los pisa*/
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  gap: 1.5rem;
+}
+
+.crud-input label {
+  display: flex; /* Permite que el contenido dentro de la etiqueta se alinee en línea */
+  align-items: center; /* Centra verticalmente los elementos dentro de la etiqueta */
+}
+
+.crud-input input {
+  margin: 0 10px; /* Añade espacio entre el texto y el input */
+}
+
+.crud-input span {
+  min-width: 30px; /* Ajusta el ancho mínimo del span para evitar que cambie de tamaño */
+  text-align: center; /* Centra el texto dentro del span */
+}
+
+.price-container {
+  position: relative;
+  display: inline-block;
+  min-width: 250px;
+}
+
+.dormitorio{
+  padding-top: 10px;
+  }
+
+.precio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.count-control {
+  display: flex;
+  align-items: center;
+  max-height: 3px;
+}
+
+.signo {
+  font-size: 1.5rem !important;
+}
+
+.label-dormitorio {
+  margin-right: 10px;
+}
+
+.count-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 5px;
+  margin-right: 5px;
+  max-height: 29px;
+  max-width: 10px;
+  margin-bottom: 10px;
+  margin-top: 0px;
+}
+
+.count-input {
+  border: none;
+  outline: none;
+  margin: 2px !important;
+  padding: 3px;
+  width: 20px;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: textfield; /* Para Firefox */
+  appearance: textfield; /* Para otros navegadores */
+  font-size: 1rem;
+}
+
+@media (max-width: 1500px) {
+  .contenedor {
+    flex-direction: column; /* Cambia la dirección a columna para mostrar elementos uno debajo del otro */
+    align-items: center; /* Centra los elementos horizontalmente */
+  }
+
+  .flex-space {
+    flex-direction: column; /* Cambia la dirección a columna para mostrar elementos uno debajo del otro */
+    align-items: center; /* Centra los elementos horizontalmente */
+  }
+
+  .input-container {
+    margin-bottom: 15px; /* Aumenta el espacio entre los contenedores */
+    text-align: center; /* Alinea el texto centrado */
+    min-width: unset; /* Elimina el ancho mínimo para que se ajuste al contenido */
+  }
+
+  .crud-input {
+    min-width: 250px; /* Establece un ancho máximo para evitar que se extienda demasiado en pantallas grandes */
+  }
+
+}
