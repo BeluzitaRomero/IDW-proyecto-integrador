@@ -42,9 +42,11 @@ const TableComponent = ({ titles, tableGet, tableDelete, tableName, tableParam }
     <>
       <div className="flex-space">
         <h2 className="section-title">{tableName}</h2>
-        <Link to={`/agregar/${tableParam}`} className="btn secondary-button">
-          Agregar +
-        </Link>
+        {tableParam !== "alojamientos-servicios" && (
+          <Link to={`/agregar/${tableParam}`} className="btn secondary-button">
+            Agregar +
+          </Link>
+        )}
       </div>
       <table className="crud-table">
         <thead>
@@ -59,10 +61,14 @@ const TableComponent = ({ titles, tableGet, tableDelete, tableName, tableParam }
           {data.map((singleData, index) => (
             <tr key={index}>
               {Object.values(singleData).map((value, i) => (
-                <td key={i}>{value}</td>
+                <td key={i} data-label={titles[i]}>
+                  {value}
+                </td>
               ))}
               <td className="flex-center">
-                <Link to={`/editar/${tableParam}/${Object.values(singleData)[0]}`} className="icon-btn fa-solid fa-solid fa-pen-to-square"></Link>
+                {tableParam !== "alojamientos-servicios" && (
+                  <Link to={`/editar/${tableParam}/${Object.values(singleData)[0]}`} className="icon-btn fa-solid fa-solid fa-pen-to-square"></Link>
+                )}
                 <button
                   className="icon-btn fa-solid fa-trash"
                   onClick={() => {
