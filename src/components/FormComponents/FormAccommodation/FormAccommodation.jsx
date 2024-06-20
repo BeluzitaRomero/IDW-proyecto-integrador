@@ -113,7 +113,7 @@ const FormAccommodation = ({ id }) => {
 
         // Obtener servicios asociados inicialmente
         const initialSelectedServices = await axios.get(`${fetchUrl}/alojamientosServicios/getAlojamientoServicio/${id}`).then((res) => res.data);
-
+        
         // Guardar los idAlojamientoServicios
         // const initialServiceIds = initialSelectedServices.map((service) => service.idAlojamientoServicio);
 
@@ -127,14 +127,14 @@ const FormAccommodation = ({ id }) => {
         const deleteRequests = servicesToDelete.map((service) =>
           axios.delete(`${fetchUrl}/alojamientosServicios/deleteAlojamientoServicio/${service.idAlojamientoServicio}`)
         );
-
+        
         // Crear nuevas asociaciones de servicios marcados (post)
-        const addRequests = servicesToAdd.map((idServicio) => {
-          const servicioSeleccionado = {
-            idAlojamiento: parseInt(id),
-            idServicio: parseInt(idServicio),
-          };
-          return axios.post(`${fetchUrl}/alojamientosServicios/createAlojamientoServicio`, servicioSeleccionado);
+        const addRequests = servicesToAdd.map((idServicio) => {                   
+            const servicioSeleccionado = {
+              idAlojamiento: parseInt(id),
+              idServicio: parseInt(idServicio),            
+            };            
+          return axios.post(`${fetchUrl}/alojamientosServicios/createAlojamientoServicio`, servicioSeleccionado);                    
         });
 
         // Esperar a que todas las solicitudes se completen porque el backend
