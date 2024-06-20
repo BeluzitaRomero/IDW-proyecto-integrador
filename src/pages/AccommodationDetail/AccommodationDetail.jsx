@@ -17,6 +17,8 @@ const AccommodationDetail = ({ item }) => {
   const [ciudad, setCiudad] = useState(null);
   const [toggle, setToggle] = useState(false);
   const [accommodationType, setAccommodationType] = useState({});
+  const [accommodationService, setAccommodationService] = useState({});
+  const [service, setService] = useState({});
 
   const [markerLocation, setMarkerLocation] = useState({
     lat: parseFloat(item.Latitud),
@@ -25,11 +27,27 @@ const AccommodationDetail = ({ item }) => {
 
   const fetchUrl = `http://localhost:3001/tiposAlojamiento/getTipoAlojamiento/${item.idTipoAlojamiento}`;
 
+  const fetchUrlAlojamientoServicios = `http://localhost:3001/alojamientosServicios/getAlojamientoServicio/${item.idAlojamiento}`;
+
+  const fetchUrlServicios = `http://localhost:3001/servicio/getAllServicios/`;
+
   useEffect(() => {
     getData(fetchUrl)
       .then((res) => setAccommodationType(res))
       .catch((err) => console.error(`${err}: no encontrado`));
-  }, [fetchUrl]);
+
+      getData(fetchUrlAlojamientoServicios)
+      .then((res) => setAccommodationService(res))
+      .catch((err) => console.error(`${err}: no encontrado`));
+
+      getData(fetchUrlServicios)
+      .then((res) => setService(res))
+      .catch((err) => console.error(`${err}: no encontrado`));
+
+  }, [fetchUrl,fetchUrlAlojamientoServicios, fetchUrlServicios]);
+  
+  const firstArrayEntries = Object.values(accommodationService);
+  const secondArrayEntries = Object.values(service);  
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -79,10 +97,16 @@ const AccommodationDetail = ({ item }) => {
                   </p>
                 </div>
                 <div className="services flex-col">
-                  <h4 className="alter-title">Servicios:</h4>
-                  {/* {item.Servicios.map((servicio) => (
-                    <p>{servicio.Nombre}</p>
-                  ))} */}
+                  <h4 className="alter-title">Servicios:</h4>                 
+                  {firstArrayEntries.map((item, index) => {
+                    const matchedService = secondArrayEntries.find(serv => serv.idServicio === item.idServicio);
+                    const serviceName = matchedService ? matchedService.Nombre : "Servicio no encontrado";
+                    return (
+                      <p key={index}>
+                        <span>{serviceName}</span>
+                      </p>
+                    );
+                  })}
                 </div>
                 <div className="services flex-col">
                   <h4 className="alter-title">Ubicación:</h4>

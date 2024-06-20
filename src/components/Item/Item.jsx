@@ -31,7 +31,7 @@ const Item = ({ item }) => {
       <Link to={`/alojamiento/${item.idAlojamiento}`} className="link">
         <div className="card-container">
           <figure>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRbcrj53mGyk-u4JwrIb6z1RBAeCpxR78gfQ&s" alt={item.Titulo} />
+            <img src="/img/casa1.webp" alt={item.Titulo} onError={AddDefaultImg} />
             {item.Estado === "Disponible" ? (
               <figcaption className="available">Disponible</figcaption>
             ) : (
