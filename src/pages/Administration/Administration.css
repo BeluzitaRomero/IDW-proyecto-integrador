@@ -1,5 +1,6 @@
 .tab-content {
-  width: 100%;
+  padding-top: 1.5rem;
+  width: 100%;  
 }
 
 .tab-btn {
@@ -14,6 +15,7 @@
 
 @media (max-width: 720px) {
   .tab-btn {
-    width: 100%;
-  }
+    width: 50%; 
+    padding: .5rem;  
+  }  
 }

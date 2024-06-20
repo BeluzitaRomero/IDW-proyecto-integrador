@@ -1,29 +1,40 @@
-import React from "react";
-import "./Navbar.css";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import './Navbar.css'; // Assuming you have a CSS file for styles
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link className="item-link underline" to="/institucional">
-            Institucional
-          </Link>
-        </li>
-        <li>
-          <Link className="item-link underline" to="/contacto">
-            Contacto
-          </Link>
-        </li>
-        <li>
-          <Link className="item-link underline" to="/administrar">
-            Administrar
-          </Link>
-        </li>
-      </ul>
+    <nav className="navbar">
+      <div className="navbar-container">
+        <div className="menu-icon" onClick={toggleMenu}>
+          {isOpen ? <FaTimes /> : <FaBars />}
+        </div>
+        <ul className={`nav-menu ${isOpen ? 'active' : ''}`}>
+          <li className="nav-item">
+            <Link className="item-link underline" to="/institucional" onClick={toggleMenu}>
+              Institucional
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="item-link underline" to="/contacto" onClick={toggleMenu}>
+              Contacto
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="item-link underline" to="/administrar" onClick={toggleMenu}>
+              Administrar
+            </Link>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 };
-
 export default Navbar;
