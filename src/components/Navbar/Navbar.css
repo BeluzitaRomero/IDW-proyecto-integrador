@@ -13,7 +13,7 @@ nav ul li {
   font-weight: 600;
 }
 
-.navbar {  
+.navbar {
   height: 60px;
   display: flex;
   justify-content: center;
@@ -57,13 +57,13 @@ nav ul li {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 85px);
     position: absolute;
-    top: 60px;
+    top: 85px;
     left: -100%;
     opacity: 1;
     transition: all 0.5s ease;
-    background: #1e1e1e;    
+    background: #1e1e1eee;
   }
 
   .nav-menu.active {
@@ -77,7 +77,7 @@ nav ul li {
     margin: 20px 0;
   }
 
-  .item-link {   
-    color: #ffff;    
+  .item-link {
+    color: #ffff;
   }
 }
