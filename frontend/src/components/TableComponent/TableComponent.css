@@ -21,6 +21,13 @@ td {
 .crud-table tr td:first-child {
   width: 3rem;
 }
+
+.crud-table tr td {
+  max-width: 20rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
 .crud-table th:last-child,
 .crud-table tr td:last-child {
   width: 9rem;
