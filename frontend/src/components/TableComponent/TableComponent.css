@@ -26,7 +26,7 @@ td {
   max-width: 20rem;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-wrap: nowrap;
+  white-space: nowrap;
 }
 .crud-table th:last-child,
 .crud-table tr td:last-child {
@@ -100,5 +100,9 @@ td {
     padding-left: 15px;
     font-weight: bold;
     text-align: left;
+  }
+
+  .crud-table tr td {
+    max-width: unset;
   }
 }
