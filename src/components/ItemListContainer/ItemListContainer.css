@@ -16,6 +16,7 @@
   margin-bottom: 20px; /* Espacio entre contenedores */
   min-width: 250px; /* Ancho máximo para cada elemento */
   margin: 0 auto; /* Centrar horizontalmente */
+  min-height: 51px;
 }
 
 .input-container select,
@@ -43,6 +44,15 @@
 .crud-input label {
   display: flex; /* Permite que el contenido dentro de la etiqueta se alinee en línea */
   align-items: center; /* Centra verticalmente los elementos dentro de la etiqueta */
+  
+}
+
+.dormitorio label { /* Esto habria q agregar */
+  min-height: 41px;
+}
+
+.casas{
+  margin-top: 50px;
 }
 
 .crud-input input {
@@ -58,6 +68,7 @@
   position: relative;
   display: inline-block;
   min-width: 250px;
+  
 }
 
 .dormitorio{

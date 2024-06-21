@@ -68,8 +68,6 @@ const ItemListContainer = () => {
         </p>
         <hr />
 
-        {/* Mostrar lista de alojamientos o loading */}
-        {filteredData ? <ItemList list={filteredData} /> : <Loading />}
       </section>
 
       <div className="contenedor m-y">
@@ -199,6 +197,11 @@ const ItemListContainer = () => {
 
         </div>
       </div>
+        <div className="casas">
+            {/* Mostrar lista de alojamientos o loading */}
+        {filteredData ? <ItemList list={filteredData} /> : <Loading />}
+        </div>             
+      
     </>
   );
 };
