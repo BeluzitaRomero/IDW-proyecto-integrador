@@ -20,9 +20,6 @@ export const deleteData = async (url) => {
   }
 };
 
-// Función para obtener la ciudad basada en las coordenadas geográficas
-//En el tp la estructura que nos tiran a usar tiene latitud y longitud, por eso
-//busque info de como usar una api que convierta esos valores a la ciudad
 export function obtenerCiudad(latitud, longitud) {
   return geocode("latlng", `${latitud},${longitud}`, {
     key: "AIzaSyDZmqbRMOVEJcGQj7g9Ssin-wWcYPMGoxM",
