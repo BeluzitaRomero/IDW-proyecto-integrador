@@ -1,0 +1,21 @@
+.flex-space.filter {
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.filter-input {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 0;
+  font-family: Montserrat;
+  font-size: 1rem;
+  width: 100%;
+  outline: none;
+}
+.filter select {
+  appearance: none;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjAwMDAgMTZMMi4yOTI5MiA3LjI5MjkyTDMuNzA3MDggNS44NzA3NUwxMiAxNC4xNjQ2TDE4LjI5MjkgN0wyMCA4LjQxNTE0TDEyLjAwMDAgMTZMMTEuMDAwMCAxNkMxMS4wMDAwIDE2IDExLjAwMDAgMTYgMTEuMDAwMCAxNlpNMTIuMDAwMCAxNEwxMi4wMDAwIDE0TDEyLjAwMDAgMTRMMTIuMDAwMCAxNEwxMi4wMDAwIDE0TDExLjAwMDAgMTZMMTEuMDAwMCAxNkwxMS4wMDAwIDE2TDEyLjAwMDAgMTRaTTExLjAwMDAgMTZMMTEuMDAwMCAxNkw5Ljk5OTk4IDE0TDIuMjkyOTIgN0wyLjI5MjkyIDdMMTEuMDAwMCAxNkwxMS4wMDAwIDE2WiIgZmlsbD0iIzAwMDAwMCIvPgo8L3N2Zz4K"); /* URL del ícono de la flecha */
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem auto;
+}
